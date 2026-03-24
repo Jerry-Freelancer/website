@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>案例详情 | DataForge</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="logo" href="index.html">DataForge</a>
+        <nav aria-label="主导航">
+          <ul class="nav-list">
+            <li><a href="about.html">关于我们</a></li>
+            <li><a href="solutions.html">解决方案</a></li>
+            <li><a href="blog.html">博客</a></li>
+            <li><a class="active" href="case-study.html">案例详情</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="section container case">
+      <h1 class="page-title">案例详情：电商大促期间的数据库延迟优化</h1>
+      <p class="meta">行业：电商 · 周期：6 周 · 数据库：MySQL</p>
+
+      <article class="card">
+        <h2>挑战</h2>
+        <p>客户在促销高峰期间出现 API 超时，核心写入链路 P95 延迟持续上升。</p>
+
+        <h2>行动</h2>
+        <ul>
+          <li>重写 12 条热点 SQL，新增覆盖索引并移除低效排序。</li>
+          <li>按业务拆分读写流量，新增只读副本承接查询峰值。</li>
+          <li>建立慢查询报警阈值与日维度优化看板。</li>
+        </ul>
+
+        <h2>结果</h2>
+        <p>核心链路 P95 延迟降低 58%，高峰期超时率从 3.1% 降至 0.4%。</p>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>© 2026 DataForge. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
