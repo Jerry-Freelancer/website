@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DocFlow - Modern Docs Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #0b1020;
+        --panel: #121a30;
+        --text: #eef3ff;
+        --muted: #a9b3cc;
+        --accent: #6b8cff;
+        --accent-2: #58e1ff;
+        --line: rgba(255, 255, 255, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 10% 20%, rgba(88, 225, 255, 0.2), transparent 25%),
+          radial-gradient(circle at 85% 10%, rgba(107, 140, 255, 0.3), transparent 30%),
+          var(--bg);
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      header {
+        padding: 24px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-weight: 800;
+        letter-spacing: 0.3px;
+      }
+
+      .logo span {
+        color: var(--accent-2);
+      }
+
+      .nav a {
+        color: var(--muted);
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: 600;
+      }
+
+      .hero {
+        padding: 88px 0 56px;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 36px;
+        align-items: center;
+      }
+
+      h1 {
+        margin: 0 0 20px;
+        font-size: clamp(2rem, 4vw, 3.8rem);
+        line-height: 1.1;
+      }
+
+      .sub {
+        margin: 0 0 28px;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        border: 1px solid transparent;
+        border-radius: 10px;
+        padding: 12px 18px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 0.95rem;
+      }
+
+      .btn.primary {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        color: #091022;
+      }
+
+      .btn.secondary {
+        background: transparent;
+        color: var(--text);
+        border-color: var(--line);
+      }
+
+      .panel {
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      .code {
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 10px;
+        background: rgba(5, 10, 20, 0.7);
+        border: 1px solid var(--line);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+        font-size: 0.9rem;
+        color: #9ed7ff;
+        overflow-x: auto;
+      }
+
+      .features {
+        padding: 24px 0 80px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .feature {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 18px;
+      }
+
+      .feature h3 {
+        margin: 0 0 10px;
+        font-size: 1rem;
+      }
+
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        padding: 20px 0 30px;
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+          padding-top: 56px;
+        }
+
+        .features {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="logo">Doc<span>Flow</span></div>
+        <nav>
+          <a href="#features">功能</a>
+          <a href="#deploy">部署</a>
+          <a href="/health">健康检查</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div>
+          <h1>给开发团队的现代文档平台</h1>
+          <p class="sub">MVP 版本，采用 Node.js 原生 HTTP 服务构建，风格参考 documentdb.io 的深色渐变与卡片布局。</p>
+          <div class="actions" id="deploy">
+            <button class="btn primary" onclick="location.href='/health'">查看 API 健康状态</button>
+            <button class="btn secondary" onclick="alert('下一步：接入真实文档与搜索能力')">MVP 下一步</button>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <strong>快速部署命令</strong>
+          <div class="code">git clone &lt;your-repo-url&gt;
+cd website
+npm install
+npm run dev</div>
+          <div class="code"># 打开浏览器
+http://localhost:3000</div>
+        </aside>
+      </section>
+
+      <section id="features" class="features">
+        <article class="feature">
+          <h3>极速启动</h3>
+          <p>零框架负担，安装依赖后即可本地运行。</p>
+        </article>
+        <article class="feature">
+          <h3>可扩展结构</h3>
+          <p>后续可无缝增加 API、认证、数据库与搜索。</p>
+        </article>
+        <article class="feature">
+          <h3>部署友好</h3>
+          <p>支持任意 Node.js 运行环境（VM、容器、PaaS）。</p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">© 2026 DocFlow MVP · Built with Node.js</div>
+    </footer>
+  </body>
+</html>
