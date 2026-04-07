@@ -1,11 +1,112 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>MySQL/MariaDB Support and Services</title><style>body{margin:0;font-family:Inter,Arial,sans-serif;background:#0b1020;color:#eef3ff}.container{width:min(1060px,calc(100% - 40px));margin:0 auto}header{padding:20px 0;border-bottom:1px solid rgba(255,255,255,.12)}a{color:#9cc8ff}.menu{display:flex;gap:18px;align-items:center}.dropdown{position:relative}.dropdown-menu{position:absolute;top:140%;left:0;display:none;background:#10172a;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px}.dropdown:hover .dropdown-menu{display:block}.dropdown-menu a{display:block;padding:8px}.card{background:#121a30;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px;margin:18px 0}p,li{color:#a9b3cc;line-height:1.7}h2{margin-bottom:8px}</style></head>
-<body><header><div class="container menu"><a href="/">Home</a><div class="dropdown"><span>Support and Services ▾</span><div class="dropdown-menu"><a href="/support-postgresql">PostgreSQL</a><a href="/support-mysql-mariadb">MySQL/MariaDB</a><a href="/support-mongodb">MongoDB</a></div></div><a href="/about-me">About Me</a></div></header>
-<main class="container">
-<section class="card"><h1>MySQL/MariaDB Support and Services</h1><p>This page is based on the service scope described by Percona's MySQL support and services offering, adapted into concise wording for your site.</p><p>Source reference: <a href="https://www.percona.com/mysql/support-and-services">percona.com/mysql/support-and-services</a>.</p></section>
-<section class="card"><h2>Support</h2><p>24x7 on-demand expert help for production incidents, slow query troubleshooting, security concerns, configuration validation, and backup/recovery reliability.</p></section>
-<section class="card"><h2>Managed Services</h2><p>Proactive monitoring, alerting, incident response, reporting, and operational ownership to reduce outages and free your team for strategic work.</p></section>
-<section class="card"><h2>Consulting</h2><p>Architecture design, migrations, upgrades, scaling strategies, performance tuning, and security assessments for complex MySQL and MariaDB environments.</p></section>
-<section class="card"><h2>Training</h2><p>Instructor-led training tracks for DBAs and developers, including replication, high availability, backup/recovery, indexing, and troubleshooting practices.</p></section>
-<section class="card"><h2>Why teams choose this model</h2><ul><li>Faster incident resolution with experienced responders.</li><li>Lower operational risk through standardized processes and regular health checks.</li><li>Flexible support across cloud, on-prem, and hybrid infrastructure.</li></ul></section>
-</main></body></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MySQL/MariaDB Support & Services | Freelance DBA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root { --bg:#080d1b; --panel:#0f162d; --line:rgba(255,255,255,.12); --text:#ecf1ff; --muted:#9cadcc; --accent:#6ea8ff; }
+      * { box-sizing: border-box; }
+      body { margin:0; font-family:Inter,sans-serif; color:var(--text); background:radial-gradient(circle at 14% 10%, rgba(56,95,255,.25), transparent 30%), radial-gradient(circle at 90% 8%, rgba(62,189,255,.2), transparent 28%), var(--bg); }
+      .container { width:min(1180px,calc(100% - 40px)); margin:0 auto; }
+      header { padding:22px 0; border-bottom:1px solid var(--line); }
+      .menu { display:flex; gap:20px; align-items:center; }
+      .menu a, .dropbtn { color:var(--muted); text-decoration:none; font-weight:600; background:none; border:none; font:inherit; cursor:pointer; }
+      .dropdown { position:relative; }
+      .dropdown-menu { position:absolute; top:130%; left:0; min-width:220px; background:#10172a; border:1px solid var(--line); border-radius:10px; padding:8px; opacity:0; transform:translateY(6px) scale(.98); pointer-events:none; transition:opacity .2s ease, transform .2s ease; }
+      .dropdown-menu a { display:block; padding:10px 12px; border-radius:8px; }
+      .dropdown-menu a:hover { background:rgba(107,140,255,.2); color:#dce7ff; }
+      .dropdown:hover .dropdown-menu, .dropdown.open .dropdown-menu { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+      .hero { padding:72px 0 34px; }
+      .kicker { color:#7cb5ff; letter-spacing:.16em; font-weight:700; font-size:.9rem; }
+      h1 { font-size:clamp(2rem,4vw,3.6rem); margin:.5rem 0 1rem; max-width:880px; line-height:1.1; }
+      .sub { color:var(--muted); max-width:820px; font-size:1.14rem; line-height:1.7; }
+      .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; padding:26px 0 30px; }
+      .card { background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); border:1px solid var(--line); border-radius:18px; padding:22px; min-height:290px; transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+      .card:hover { transform:translateY(-6px); border-color:rgba(110,168,255,.6); box-shadow:0 16px 40px rgba(16,66,130,.32); }
+      .card .eyebrow { letter-spacing:.14em; color:#7cb5ff; font-weight:700; font-size:.84rem; margin-bottom:10px; }
+      .card h3 { margin:0 0 10px; font-size:1.8rem; }
+      .card p { color:var(--muted); line-height:1.65; margin:0; }
+      .chips { margin-top:16px; display:flex; gap:8px; flex-wrap:wrap; }
+      .chip { border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.04); padding:6px 10px; border-radius:999px; font-size:.85rem; color:#d6e5ff; }
+      .section { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:22px; margin-bottom:16px; }
+      .section p, .section li { color:var(--muted); line-height:1.7; }
+      footer { color:var(--muted); border-top:1px solid var(--line); padding:22px 0 36px; margin-top:20px; }
+      @media (max-width:1100px){ .grid{grid-template-columns:repeat(2,1fr);} }
+      @media (max-width:800px){ .grid{grid-template-columns:1fr;} }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container menu">
+        <a href="/">Home</a>
+        <div class="dropdown">
+          <button class="dropbtn">Support and Services ▾</button>
+          <div class="dropdown-menu">
+            <a href="/support-postgresql">PostgreSQL</a>
+            <a href="/support-mysql-mariadb">MySQL/MariaDB</a>
+            <a href="/support-mongodb">MongoDB</a>
+          </div>
+        </div>
+        <a href="/about-me">About Me</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="kicker">MYSQL / MARIADB SERVICES</div>
+        <h1>Freelance MySQL/MariaDB expert support for fast-moving teams</h1>
+        <p class="sub">
+          This service page is inspired by the support model presented by Percona and rewritten from an independent
+          freelancer perspective: flexible engagement, direct senior support, and practical delivery from incident
+          response to long-term optimization.
+        </p>
+      </section>
+
+      <section class="grid">
+        <article class="card"><div class="eyebrow">SUPPORT</div><h3>Production Incident Response</h3><p>I help diagnose and stabilize outages, lock waits, replication breaks, and slow-query spikes with practical, immediate actions.</p><div class="chips"><span class="chip">24×7 option</span><span class="chip">Root-cause first</span></div></article>
+        <article class="card"><div class="eyebrow">MANAGED SERVICES</div><h3>Proactive DBA Care</h3><p>Get recurring health checks, monitoring review, backup validation, and capacity planning so your team can stay focused on product delivery.</p><div class="chips"><span class="chip">Monitoring</span><span class="chip">SLA-based</span></div></article>
+        <article class="card"><div class="eyebrow">CONSULTING</div><h3>Architecture & Performance</h3><p>I provide design guidance for replication, HA, failover workflows, schema strategy, indexing, and query tuning for demanding workloads.</p><div class="chips"><span class="chip">HA design</span><span class="chip">Performance tuning</span></div></article>
+        <article class="card"><div class="eyebrow">TRAINING</div><h3>Hands-on Team Training</h3><p>Upskill engineers with practical sessions on backups, recovery drills, troubleshooting patterns, and production-ready operational standards.</p><div class="chips"><span class="chip">Remote / Onsite</span><span class="chip">Real-world labs</span></div></article>
+      </section>
+
+      <section class="section">
+        <h2>How I work as a freelancer</h2>
+        <ul>
+          <li>Direct collaboration with your engineering team and stakeholders.</li>
+          <li>Flexible retainers or project-based engagements.</li>
+          <li>Clear execution plans, measurable milestones, and transparent reporting.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Reference</h2>
+        <p>
+          Service categories and scope were referenced from Percona's MySQL support and services page and then rewritten
+          for this freelance offer format: <a href="https://www.percona.com/mysql/support-and-services">https://www.percona.com/mysql/support-and-services</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">© 2026 Freelance Database Services</div>
+    </footer>
+
+    <script>
+      const dropdown = document.querySelector('.dropdown');
+      const dropbtn = document.querySelector('.dropbtn');
+      if (dropdown && dropbtn) {
+        dropbtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          dropdown.classList.toggle('open');
+        });
+        document.addEventListener('click', (e) => {
+          if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
+        });
+      }
+    </script>
+  </body>
+</html>

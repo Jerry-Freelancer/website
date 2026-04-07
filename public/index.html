@@ -13,9 +13,9 @@
       .container{width:min(1200px,calc(100% - 40px));margin:0 auto} header{padding:24px 0;border-bottom:1px solid var(--line)}
       .nav{display:flex;justify-content:space-between;align-items:center}.logo{font-weight:800}.logo span{color:var(--accent-2)}
       .menu{display:flex;align-items:center;gap:20px}.menu>a,.dropbtn{color:var(--muted);text-decoration:none;font-weight:600;background:none;border:none;font:inherit;cursor:pointer}
-      .dropdown{position:relative}.dropdown-menu{position:absolute;top:140%;left:0;min-width:220px;background:#10172a;border:1px solid var(--line);border-radius:10px;padding:8px;display:none;z-index:10}
+      .dropdown{position:relative}.dropdown-menu{position:absolute;top:130%;left:0;min-width:220px;background:#10172a;border:1px solid var(--line);border-radius:10px;padding:8px;z-index:10;opacity:0;transform:translateY(6px) scale(.98);pointer-events:none;transition:opacity .2s ease,transform .2s ease}
       .dropdown-menu a{display:block;color:#d7e6ff;text-decoration:none;padding:10px 12px;border-radius:8px}.dropdown-menu a:hover{background:rgba(107,140,255,.2)}
-      .dropdown:hover .dropdown-menu{display:block}
+      .dropdown:hover .dropdown-menu,.dropdown.open .dropdown-menu,.dropdown:focus-within .dropdown-menu{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
 
       .hero{padding:88px 0 56px;display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center}
       h1{margin:0 0 20px;font-size:clamp(2rem,4vw,3.8rem);line-height:1.1}.sub{margin:0 0 28px;color:var(--muted);font-size:1.05rem}
@@ -67,6 +67,13 @@
       const fillList=(id,items)=>{const el=document.getElementById(id);el.innerHTML='';if(!items||items.length===0){el.innerHTML='<li>No content yet</li>';return;}items.slice(0,12).forEach((item)=>{const li=document.createElement('li');li.textContent=`${item.title} - ${item.excerpt||''}`;el.appendChild(li);});};
       const renderCards=(cards)=>{const wrap=document.getElementById('featureCards');wrap.innerHTML='';(cards||[]).forEach((card)=>{const el=document.createElement('article');el.className='feature';const tags=(card.tags||[]).map((t)=>`<span class="chip">${t}</span>`).join('');el.innerHTML=`<div class="kicker">${card.eyebrow||''}</div><h3>${card.title||''}</h3><p>${card.description||''}</p><div class="chips">${tags}</div><a href="${card.linkHref||'/about-me'}">${card.linkLabel||'Learn more'}</a>`;wrap.appendChild(el);});};
       fetch('/api/content').then((r)=>r.json()).then((data)=>{document.getElementById('siteName').innerHTML=`${data.siteName||'Doc'}<span>Flow</span>`;document.getElementById('tagline').textContent=data.tagline||'';document.getElementById('heroTitle').textContent=data.heroTitle||'';document.getElementById('heroDescription').textContent=data.heroDescription||'';const p=document.getElementById('primaryCta'); p.textContent=data?.primaryCta?.label||'Check API Health'; p.href=data?.primaryCta?.href||'/health';const s=document.getElementById('secondaryCta'); s.textContent=data?.secondaryCta?.label||'View Content API'; s.href=data?.secondaryCta?.href||'/api/content';const cap=data.capabilities||{};document.getElementById('capLabel').textContent=cap.label||'CAPABILITIES';document.getElementById('capHeading').textContent=cap.heading||'Core database services for production workloads';document.getElementById('capSub').textContent=cap.subheading||'';renderCards(cap.cards||[]);fillList('pages',data.pages||[]); fillList('posts',data.posts||[]);}).catch(()=>{document.getElementById('heroTitle').textContent='Failed to load migrated content';document.getElementById('heroDescription').textContent='Please confirm /api/content is reachable.';});
+    
+      const dropdown=document.querySelector('.dropdown');
+      const dropbtn=document.querySelector('.dropbtn');
+      if(dropdown&&dropbtn){
+        dropbtn.addEventListener('click',(e)=>{e.preventDefault();dropdown.classList.toggle('open');});
+        document.addEventListener('click',(e)=>{if(!dropdown.contains(e.target)){dropdown.classList.remove('open');}});
+      }
     </script>
   </body>
 </html>
