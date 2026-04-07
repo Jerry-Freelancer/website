@@ -56,6 +56,11 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (req.url === '/about-me' || req.url === '/about-me.html') {
+    sendFile(res, path.join(publicDir, 'about-me.html'));
+    return;
+  }
+
   sendJson(res, 404, { error: 'not_found' });
 });
 
