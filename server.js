@@ -31,6 +31,28 @@ const sendFile = (res, filePath) => {
   });
 };
 
+
+const blogsDir = path.join(__dirname, 'content', 'blogs');
+
+const readJsonFile = (filePath, fallback) => {
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  } catch (_err) {
+    return fallback;
+  }
+};
+
+const listPublishedBlogs = () => {
+  const index = readJsonFile(path.join(blogsDir, 'index.json'), []);
+  return index.filter((x) => x.status === 'published');
+};
+
+const readBlogPost = (slug) => {
+  if (!slug || /[^a-z0-9-]/.test(slug)) return null;
+  const filePath = path.join(blogsDir, `${slug}.json`);
+  return readJsonFile(filePath, null);
+};
+
 const readContent = () => {
   try {
     const raw = fs.readFileSync(contentPath, 'utf8');
@@ -51,6 +73,22 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (req.url === '/api/blogs') {
+    sendJson(res, 200, listPublishedBlogs());
+    return;
+  }
+
+  if (req.url.startsWith('/api/blogs/')) {
+    const slug = req.url.replace('/api/blogs/', '').split('?')[0];
+    const post = readBlogPost(slug);
+    if (!post || post.status !== 'published') {
+      sendJson(res, 404, { error: 'blog_not_found' });
+      return;
+    }
+    sendJson(res, 200, post);
+    return;
+  }
+
   if (req.url === '/' || req.url === '/index.html') {
     sendFile(res, path.join(publicDir, 'index.html'));
     return;
@@ -61,6 +99,15 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  if (req.url === '/blogs' || req.url === '/blogs.html') {
+    sendFile(res, path.join(publicDir, 'blogs.html'));
+    return;
+  }
+
+  if (req.url.startsWith('/blog')) {
+    sendFile(res, path.join(publicDir, 'blog.html'));
+    return;
+  }
 
   if (req.url === '/support-postgresql' || req.url === '/support-postgresql.html') {
     sendFile(res, path.join(publicDir, 'support-postgresql.html'));

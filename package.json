@@ -6,7 +6,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "blog:new": "node scripts/new-blog.js",
+    "blog:publish": "node scripts/publish-blog.js"
   },
   "engines": {
     "node": ">=18"
