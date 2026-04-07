@@ -61,6 +61,21 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+
+  if (req.url === '/support-postgresql' || req.url === '/support-postgresql.html') {
+    sendFile(res, path.join(publicDir, 'support-postgresql.html'));
+    return;
+  }
+
+  if (req.url === '/support-mysql-mariadb' || req.url === '/support-mysql-mariadb.html') {
+    sendFile(res, path.join(publicDir, 'support-mysql-mariadb.html'));
+    return;
+  }
+
+  if (req.url === '/support-mongodb' || req.url === '/support-mongodb.html') {
+    sendFile(res, path.join(publicDir, 'support-mongodb.html'));
+    return;
+  }
   sendJson(res, 404, { error: 'not_found' });
 });
 
