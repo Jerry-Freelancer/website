@@ -65,10 +65,10 @@
       <div class="container nav">
         <div class="logo" id="siteName">Doc<span>Flow</span></div>
         <nav>
-          <a href="#features">栏目</a>
-          <a href="#deploy">部署</a>
-          <a href="/about-me">about-me</a>
-          <a href="/health">健康检查</a>
+          <a href="#features">Services</a>
+          <a href="#deploy">Deployment</a>
+          <a href="/about-me">About Me</a>
+          <a href="/health">Health</a>
         </nav>
       </div>
     </header>
@@ -76,18 +76,18 @@
     <main class="container">
       <section class="hero">
         <div>
-          <h1 id="heroTitle">加载中...</h1>
-          <p class="sub" id="heroDescription">正在读取迁移内容。</p>
+          <h1 id="heroTitle">Loading...</h1>
+          <p class="sub" id="heroDescription">Loading migrated content.</p>
           <div class="actions" id="deploy">
-            <a class="btn primary" id="primaryCta" href="/health">查看 API 健康状态</a>
-            <a class="btn secondary" id="secondaryCta" href="/api/content">查看内容 API</a>
+            <a class="btn primary" id="primaryCta" href="/health">Check API Health</a>
+            <a class="btn secondary" id="secondaryCta" href="/api/content">View Content API</a>
           </div>
         </div>
 
         <aside class="panel">
-          <strong id="tagline">从 WordPress 迁移而来的内容站点</strong>
+          <strong id="tagline">WordPress content migration-ready website</strong>
           <div class="code" id="deploySteps">git clone &lt;your-repo-url&gt;\ncd website\nnpm install\nnpm run dev</div>
-          <div class="code"># 打开浏览器\nhttp://localhost:3000</div>
+          <div class="code"># Open in browser\nhttp://localhost:3000</div>
         </aside>
       </section>
 
@@ -114,7 +114,7 @@
         const el = document.getElementById(id);
         el.innerHTML = '';
         if (!items || items.length === 0) {
-          el.innerHTML = '<li>暂无内容</li>';
+          el.innerHTML = '<li>No content yet</li>';
           return;
         }
         items.slice(0, 12).forEach((item) => {
@@ -133,11 +133,11 @@
           document.getElementById('heroDescription').textContent = data.heroDescription || '';
 
           const p = document.getElementById('primaryCta');
-          p.textContent = data?.primaryCta?.label || '查看 API 健康状态';
+          p.textContent = data?.primaryCta?.label || 'Check API Health';
           p.href = data?.primaryCta?.href || '/health';
 
           const s = document.getElementById('secondaryCta');
-          s.textContent = data?.secondaryCta?.label || '查看内容 API';
+          s.textContent = data?.secondaryCta?.label || 'View Content API';
           s.href = data?.secondaryCta?.href || '/api/content';
 
           const features = document.getElementById('features');
@@ -146,7 +146,7 @@
             const card = document.createElement('article');
             card.className = 'feature';
             const h3 = document.createElement('h3');
-            h3.textContent = section.title || '栏目';
+            h3.textContent = section.title || 'Services';
             const p = document.createElement('p');
             p.textContent = (section.items || []).join(' · ');
             card.append(h3, p);
@@ -157,8 +157,8 @@
           fillList('posts', data.posts || []);
         })
         .catch(() => {
-          document.getElementById('heroTitle').textContent = '读取迁移内容失败';
-          document.getElementById('heroDescription').textContent = '请确认 /api/content 可访问。';
+          document.getElementById('heroTitle').textContent = 'Failed to load migrated content';
+          document.getElementById('heroDescription').textContent = 'Please confirm /api/content is reachable.';
         });
     </script>
   </body>

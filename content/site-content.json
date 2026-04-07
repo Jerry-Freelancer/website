@@ -1,23 +1,39 @@
 {
   "siteName": "DocFlow",
-  "tagline": "从 WordPress 迁移而来的内容站点",
-  "heroTitle": "你的内容，已经准备好迁移到新网站",
-  "heroDescription": "本页面支持从 WordPress REST API 拉取页面与文章，并在 Node.js MVP 中展示。",
+  "tagline": "WordPress content migration-ready website",
+  "heroTitle": "Reliable Database Services for Mission-Critical Workloads",
+  "heroDescription": "This MVP keeps the existing visual style while rendering migrated content from your legacy WordPress data.",
   "primaryCta": {
-    "label": "查看健康检查",
+    "label": "Check API Health",
     "href": "/health"
   },
   "secondaryCta": {
-    "label": "查看内容 API",
+    "label": "View Content API",
     "href": "/api/content"
   },
   "sections": [
     {
-      "title": "迁移说明",
+      "title": "Support",
       "items": [
-        "运行 scripts/import-wordpress.js 可抓取旧站内容",
-        "抓取成功后会覆盖 content/site-content.json",
-        "首页会自动渲染新的标题、简介与栏目"
+        "Resolve issues quicker and ensure the continuous performance of database and its extensions with 24×7 consultative support."
+      ]
+    },
+    {
+      "title": "Managed Services",
+      "items": [
+        "Free your team to focus on strategic priorities with proactive, round-the-clock database management at a fraction of the cost of a dedicated, full-time DBA."
+      ]
+    },
+    {
+      "title": "Consulting",
+      "items": [
+        "Solve your complex database performance issues and design challenges with our expert team at your side."
+      ]
+    },
+    {
+      "title": "Training",
+      "items": [
+        "Level up your teams’ database skills with instructor-led, hands-on training. Onsite or remote."
       ]
     }
   ],

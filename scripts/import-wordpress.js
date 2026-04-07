@@ -61,18 +61,18 @@ async function run() {
 
   const next = {
     siteName: 'DocFlow',
-    tagline: 'WordPress 内容迁移结果',
-    heroTitle: '旧站内容已迁移到 Node.js MVP',
-    heroDescription: `共迁移 ${mappedPages.length} 个页面、${mappedPosts.length} 篇文章。`,
-    primaryCta: { label: '查看健康检查', href: '/health' },
-    secondaryCta: { label: '查看内容 API', href: '/api/content' },
+    tagline: 'WordPress Migration Result',
+    heroTitle: 'Legacy site content migrated to Node.js MVP',
+    heroDescription: `Migrated ${mappedPages.length} pages and ${mappedPosts.length} posts.`,
+    primaryCta: { label: 'Check API Health', href: '/health' },
+    secondaryCta: { label: 'View Content API', href: '/api/content' },
     sections: [
       {
-        title: '迁移统计',
+        title: 'Migration Stats',
         items: [
-          `页面数量：${mappedPages.length}`,
-          `文章数量：${mappedPosts.length}`,
-          '如需完整富文本渲染，可在下一步接入模板引擎'
+          `Pages: ${mappedPages.length}`,
+          `Posts: ${mappedPosts.length}`,
+          'For full rich-text rendering, integrate a template engine in the next step'
         ]
       }
     ],
