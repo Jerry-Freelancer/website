@@ -11,32 +11,45 @@
     "label": "View Content API",
     "href": "/api/content"
   },
-  "sections": [
-    {
-      "title": "Support",
-      "items": [
-        "Resolve issues quicker and ensure the continuous performance of database and its extensions with 24×7 consultative support."
-      ]
-    },
-    {
-      "title": "Managed Services",
-      "items": [
-        "Free your team to focus on strategic priorities with proactive, round-the-clock database management at a fraction of the cost of a dedicated, full-time DBA."
-      ]
-    },
-    {
-      "title": "Consulting",
-      "items": [
-        "Solve your complex database performance issues and design challenges with our expert team at your side."
-      ]
-    },
-    {
-      "title": "Training",
-      "items": [
-        "Level up your teams’ database skills with instructor-led, hands-on training. Onsite or remote."
-      ]
-    }
-  ],
+  "capabilities": {
+    "label": "CAPABILITIES",
+    "heading": "Core database services for production workloads",
+    "subheading": "From troubleshooting to architecture, delivered by senior database specialists.",
+    "cards": [
+      {
+        "eyebrow": "SUPPORT",
+        "title": "24×7 Database Support",
+        "description": "Resolve issues faster and keep databases and extensions healthy with continuous consultative support.",
+        "tags": ["24×7", "Incident response"],
+        "linkLabel": "Contact support",
+        "linkHref": "/about-me"
+      },
+      {
+        "eyebrow": "MANAGED SERVICES",
+        "title": "Proactive DBA Management",
+        "description": "Offload round-the-clock monitoring, maintenance, and optimization at a fraction of full-time DBA cost.",
+        "tags": ["Monitoring", "Cost efficient"],
+        "linkLabel": "Explore managed services",
+        "linkHref": "/about-me"
+      },
+      {
+        "eyebrow": "CONSULTING",
+        "title": "Performance & Architecture",
+        "description": "Solve complex query bottlenecks and design resilient, scalable database architectures with expert guidance.",
+        "tags": ["Performance", "Design review"],
+        "linkLabel": "Talk to an expert",
+        "linkHref": "/about-me"
+      },
+      {
+        "eyebrow": "TRAINING",
+        "title": "Hands-on Team Enablement",
+        "description": "Upskill teams with instructor-led, practical training sessions delivered remotely or onsite.",
+        "tags": ["Instructor-led", "Onsite or remote"],
+        "linkLabel": "View training options",
+        "linkHref": "/about-me"
+      }
+    ]
+  },
   "pages": [],
   "posts": []
 }
