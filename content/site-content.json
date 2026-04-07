@@ -1,0 +1,42 @@
+{
+  "siteName": "DocFlow",
+  "tagline": "WordPress content migration-ready website",
+  "heroTitle": "Reliable Database Services for Mission-Critical Workloads",
+  "heroDescription": "This MVP keeps the existing visual style while rendering migrated content from your legacy WordPress data.",
+  "primaryCta": {
+    "label": "Check API Health",
+    "href": "/health"
+  },
+  "secondaryCta": {
+    "label": "View Content API",
+    "href": "/api/content"
+  },
+  "sections": [
+    {
+      "title": "Support",
+      "items": [
+        "Resolve issues quicker and ensure the continuous performance of database and its extensions with 24×7 consultative support."
+      ]
+    },
+    {
+      "title": "Managed Services",
+      "items": [
+        "Free your team to focus on strategic priorities with proactive, round-the-clock database management at a fraction of the cost of a dedicated, full-time DBA."
+      ]
+    },
+    {
+      "title": "Consulting",
+      "items": [
+        "Solve your complex database performance issues and design challenges with our expert team at your side."
+      ]
+    },
+    {
+      "title": "Training",
+      "items": [
+        "Level up your teams’ database skills with instructor-led, hands-on training. Onsite or remote."
+      ]
+    }
+  ],
+  "pages": [],
+  "posts": []
+}
