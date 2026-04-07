@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DocFlow - Modern Docs Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #0b1020;
+        --panel: #121a30;
+        --text: #eef3ff;
+        --muted: #a9b3cc;
+        --accent: #6b8cff;
+        --accent-2: #58e1ff;
+        --line: rgba(255, 255, 255, 0.12);
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 10% 20%, rgba(88, 225, 255, 0.2), transparent 25%),
+          radial-gradient(circle at 85% 10%, rgba(107, 140, 255, 0.3), transparent 30%),
+          var(--bg);
+      }
+      .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+      header { padding: 24px 0; border-bottom: 1px solid var(--line); }
+      .nav { display: flex; justify-content: space-between; align-items: center; }
+      .logo { font-weight: 800; letter-spacing: 0.3px; }
+      .logo span { color: var(--accent-2); }
+      .nav a { color: var(--muted); text-decoration: none; margin-left: 20px; font-weight: 600; }
+      .hero { padding: 88px 0 56px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 36px; align-items: center; }
+      h1 { margin: 0 0 20px; font-size: clamp(2rem, 4vw, 3.8rem); line-height: 1.1; }
+      .sub { margin: 0 0 28px; color: var(--muted); font-size: 1.05rem; }
+      .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+      .btn { border: 1px solid transparent; border-radius: 10px; padding: 12px 18px; font-weight: 700; cursor: pointer; font-size: 0.95rem; text-decoration: none; display: inline-block; }
+      .btn.primary { background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #091022; }
+      .btn.secondary { background: transparent; color: var(--text); border-color: var(--line); }
+      .panel {
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+        border: 1px solid var(--line); border-radius: 16px; padding: 24px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      }
+      .code { margin-top: 12px; padding: 12px; border-radius: 10px; background: rgba(5, 10, 20, 0.7); border: 1px solid var(--line); font-family: ui-monospace, monospace; font-size: 0.9rem; color: #9ed7ff; overflow-x: auto; white-space: pre-wrap; }
+      .features { padding: 24px 0 80px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .feature { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+      .feature h3 { margin: 0 0 10px; font-size: 1rem; }
+      .feature p { margin: 0; color: var(--muted); font-size: 0.93rem; }
+      .lists { padding-bottom: 80px; display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+      .lists ul { margin: 0; padding-left: 18px; }
+      .lists li { color: var(--muted); margin-bottom: 8px; }
+      footer { border-top: 1px solid var(--line); color: var(--muted); padding: 20px 0 30px; }
+      @media (max-width: 900px) {
+        .hero { grid-template-columns: 1fr; padding-top: 56px; }
+        .features, .lists { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="logo" id="siteName">Doc<span>Flow</span></div>
+        <nav>
+          <a href="#features">栏目</a>
+          <a href="#deploy">部署</a>
+          <a href="/health">健康检查</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div>
+          <h1 id="heroTitle">加载中...</h1>
+          <p class="sub" id="heroDescription">正在读取迁移内容。</p>
+          <div class="actions" id="deploy">
+            <a class="btn primary" id="primaryCta" href="/health">查看 API 健康状态</a>
+            <a class="btn secondary" id="secondaryCta" href="/api/content">查看内容 API</a>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <strong id="tagline">从 WordPress 迁移而来的内容站点</strong>
+          <div class="code" id="deploySteps">git clone &lt;your-repo-url&gt;\ncd website\nnpm install\nnpm run dev</div>
+          <div class="code"># 打开浏览器\nhttp://localhost:3000</div>
+        </aside>
+      </section>
+
+      <section id="features" class="features"></section>
+
+      <section class="lists">
+        <article class="feature">
+          <h3>Pages</h3>
+          <ul id="pages"></ul>
+        </article>
+        <article class="feature">
+          <h3>Posts</h3>
+          <ul id="posts"></ul>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">© 2026 DocFlow MVP · Built with Node.js</div>
+    </footer>
+
+    <script>
+      const fillList = (id, items) => {
+        const el = document.getElementById(id);
+        el.innerHTML = '';
+        if (!items || items.length === 0) {
+          el.innerHTML = '<li>暂无内容</li>';
+          return;
+        }
+        items.slice(0, 12).forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = `${item.title} - ${item.excerpt || ''}`;
+          el.appendChild(li);
+        });
+      };
+
+      fetch('/api/content')
+        .then((r) => r.json())
+        .then((data) => {
+          document.getElementById('siteName').innerHTML = `${data.siteName || 'Doc'}<span>Flow</span>`;
+          document.getElementById('tagline').textContent = data.tagline || '';
+          document.getElementById('heroTitle').textContent = data.heroTitle || '';
+          document.getElementById('heroDescription').textContent = data.heroDescription || '';
+
+          const p = document.getElementById('primaryCta');
+          p.textContent = data?.primaryCta?.label || '查看 API 健康状态';
+          p.href = data?.primaryCta?.href || '/health';
+
+          const s = document.getElementById('secondaryCta');
+          s.textContent = data?.secondaryCta?.label || '查看内容 API';
+          s.href = data?.secondaryCta?.href || '/api/content';
+
+          const features = document.getElementById('features');
+          features.innerHTML = '';
+          (data.sections || []).forEach((section) => {
+            const card = document.createElement('article');
+            card.className = 'feature';
+            const h3 = document.createElement('h3');
+            h3.textContent = section.title || '栏目';
+            const p = document.createElement('p');
+            p.textContent = (section.items || []).join(' · ');
+            card.append(h3, p);
+            features.appendChild(card);
+          });
+
+          fillList('pages', data.pages || []);
+          fillList('posts', data.posts || []);
+        })
+        .catch(() => {
+          document.getElementById('heroTitle').textContent = '读取迁移内容失败';
+          document.getElementById('heroDescription').textContent = '请确认 /api/content 可访问。';
+        });
+    </script>
+  </body>
+</html>
