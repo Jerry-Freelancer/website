@@ -4,6 +4,7 @@ const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 const publicDir = path.join(__dirname, 'public');
+const contentPath = path.join(__dirname, 'content', 'site-content.json');
 
 const sendJson = (res, statusCode, data) => {
   res.writeHead(statusCode, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -30,9 +31,23 @@ const sendFile = (res, filePath) => {
   });
 };
 
+const readContent = () => {
+  try {
+    const raw = fs.readFileSync(contentPath, 'utf8');
+    return JSON.parse(raw);
+  } catch (_err) {
+    return { error: 'content_unavailable' };
+  }
+};
+
 const server = http.createServer((req, res) => {
   if (req.url === '/health') {
     sendJson(res, 200, { status: 'ok' });
+    return;
+  }
+
+  if (req.url === '/api/content') {
+    sendJson(res, 200, readContent());
     return;
   }
 
