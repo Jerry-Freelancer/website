@@ -5,6 +5,8 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const publicDir = path.join(__dirname, 'public');
 const contentPath = path.join(__dirname, 'content', 'site-content.json');
+const blogsDir = path.join(__dirname, 'content', 'blogs');
+const markdownBlogsDir = path.join(__dirname, 'content', 'blogs-md');
 
 const sendJson = (res, statusCode, data) => {
   res.writeHead(statusCode, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -31,9 +33,6 @@ const sendFile = (res, filePath) => {
   });
 };
 
-
-const blogsDir = path.join(__dirname, 'content', 'blogs');
-
 const readJsonFile = (filePath, fallback) => {
   try {
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -42,16 +41,111 @@ const readJsonFile = (filePath, fallback) => {
   }
 };
 
-const listPublishedBlogs = () => {
+const parseFrontMatter = (raw) => {
+  if (!raw.startsWith('---')) return { meta: {}, body: raw };
+  const end = raw.indexOf('\n---', 3);
+  if (end === -1) return { meta: {}, body: raw };
+
+  const block = raw.slice(3, end).trim();
+  const body = raw.slice(end + 4).trim();
+  const meta = {};
+
+  block.split('\n').forEach((line) => {
+    const idx = line.indexOf(':');
+    if (idx === -1) return;
+    const key = line.slice(0, idx).trim();
+    const value = line.slice(idx + 1).trim();
+    if (key === 'tags') {
+      meta.tags = value.split(',').map((x) => x.trim()).filter(Boolean);
+    } else {
+      meta[key] = value;
+    }
+  });
+
+  return { meta, body };
+};
+
+const markdownToHtml = (markdown) => {
+  const converted = markdown
+    .replace(/^### (.*)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.*)$/gm, '<h2>$1</h2>')
+    .replace(/^# (.*)$/gm, '<h1>$1</h1>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+  return converted
+    .split(/\n\n+/)
+    .map((block) => block.trim())
+    .filter(Boolean)
+    .map((block) => (block.startsWith('<h1') || block.startsWith('<h2') || block.startsWith('<h3') ? block : `<p>${block}</p>`))
+    .join('');
+};
+
+const slugFromFile = (file) => file.replace(/\.md$/, '');
+
+const listMarkdownBlogs = () => {
+  let files = [];
+  try {
+    files = fs.readdirSync(markdownBlogsDir).filter((x) => x.endsWith('.md'));
+  } catch (_err) {
+    return [];
+  }
+
+  return files
+    .map((file) => {
+      const raw = fs.readFileSync(path.join(markdownBlogsDir, file), 'utf8');
+      const { meta } = parseFrontMatter(raw);
+      const slug = meta.slug || slugFromFile(file);
+      return {
+        slug,
+        title: meta.title || slug,
+        excerpt: meta.excerpt || '',
+        author: meta.author || 'Unknown',
+        publishedAt: meta.publishedAt || '',
+        tags: meta.tags || [],
+        status: meta.status || 'draft',
+        format: 'markdown'
+      };
+    })
+    .filter((x) => x.status === 'published');
+};
+
+const listJsonBlogs = () => {
   const index = readJsonFile(path.join(blogsDir, 'index.json'), []);
   return index.filter((x) => x.status === 'published');
 };
 
-const readBlogPost = (slug) => {
+const listPublishedBlogs = () => {
+  const markdown = listMarkdownBlogs();
+  const json = listJsonBlogs();
+  return [...markdown, ...json].sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
+};
+
+const readMarkdownBlogPost = (slug) => {
+  if (!slug || /[^a-z0-9-]/.test(slug)) return null;
+  const filePath = path.join(markdownBlogsDir, `${slug}.md`);
+  if (!fs.existsSync(filePath)) return null;
+  const raw = fs.readFileSync(filePath, 'utf8');
+  const { meta, body } = parseFrontMatter(raw);
+  return {
+    slug,
+    title: meta.title || slug,
+    author: meta.author || 'Unknown',
+    publishedAt: meta.publishedAt || '',
+    status: meta.status || 'draft',
+    tags: meta.tags || [],
+    contentHtml: markdownToHtml(body),
+    format: 'markdown'
+  };
+};
+
+const readJsonBlogPost = (slug) => {
   if (!slug || /[^a-z0-9-]/.test(slug)) return null;
   const filePath = path.join(blogsDir, `${slug}.json`);
   return readJsonFile(filePath, null);
 };
+
+const readBlogPost = (slug) => readMarkdownBlogPost(slug) || readJsonBlogPost(slug);
 
 const readContent = () => {
   try {

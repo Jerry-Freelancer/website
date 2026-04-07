@@ -94,3 +94,35 @@ git push
 ```
 
 After deployment, the new blog will be live.
+
+## Markdown blog publishing
+
+You can now publish Markdown directly (no third-party redirects).
+
+### Markdown file format
+
+Create a file under `content/blogs-md/` with front matter:
+
+```md
+---
+slug: my-first-markdown-post
+title: My First Markdown Post
+author: Your Name
+publishedAt: 2026-04-07
+excerpt: One-line summary shown on /blogs
+tags: mysql,performance
+status: published
+---
+
+## Heading
+
+Your markdown content here.
+```
+
+### Publish from an external markdown file
+
+```bash
+npm run blog:publish:md -- /path/to/your-post.md
+```
+
+Then open `http://localhost:3000/blogs`.

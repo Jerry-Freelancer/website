@@ -8,7 +8,8 @@
     "start": "node server.js",
     "dev": "node server.js",
     "blog:new": "node scripts/new-blog.js",
-    "blog:publish": "node scripts/publish-blog.js"
+    "blog:publish": "node scripts/publish-blog.js",
+    "blog:publish:md": "node scripts/publish-markdown.js"
   },
   "engines": {
     "node": ">=18"

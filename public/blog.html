@@ -14,7 +14,7 @@
           document.getElementById('title').textContent=post.title||'';
           document.getElementById('meta').textContent=`${post.publishedAt||''} · ${post.author||''}`;
           const body=document.getElementById('body'); body.innerHTML='';
-          (post.content||[]).forEach((text)=>{const p=document.createElement('p');p.className='p';p.textContent=text;body.appendChild(p);});
+          if(post.contentHtml){body.innerHTML=post.contentHtml;}else{(post.content||[]).forEach((text)=>{const p=document.createElement('p');p.className='p';p.textContent=text;body.appendChild(p);});}
         });
       }
     </script>
