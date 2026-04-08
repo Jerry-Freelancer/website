@@ -1,15 +1,15 @@
 {
   "siteName": "DocFlow",
   "tagline": "WordPress content migration-ready website",
-  "heroTitle": "Reliable Database Services for Mission-Critical Workloads",
-  "heroDescription": "This MVP keeps the existing visual style while rendering migrated content from your legacy WordPress data.",
+  "heroTitle": "Senior Database Consulting for High-Stakes Production Systems",
+  "heroDescription": "From emergency incident response to long-term architecture hardening, get direct expert help across PostgreSQL, MySQL/MariaDB, and MongoDB.",
   "primaryCta": {
-    "label": "Check API Health",
+    "label": "Quick Check",
     "href": "/health"
   },
   "secondaryCta": {
-    "label": "View Content API",
-    "href": "/api/content"
+    "label": "Hire Me for Consulting",
+    "href": "/about-me"
   },
   "capabilities": {
     "label": "CAPABILITIES",
@@ -18,9 +18,12 @@
     "cards": [
       {
         "eyebrow": "SUPPORT",
-        "title": "24×7 Database Support",
+        "title": "24\u00d77 Database Support",
         "description": "Resolve issues faster and keep databases and extensions healthy with continuous consultative support.",
-        "tags": ["24×7", "Incident response"],
+        "tags": [
+          "24\u00d77",
+          "Incident response"
+        ],
         "linkLabel": "Contact support",
         "linkHref": "/about-me"
       },
@@ -28,7 +31,10 @@
         "eyebrow": "MANAGED SERVICES",
         "title": "Proactive DBA Management",
         "description": "Offload round-the-clock monitoring, maintenance, and optimization at a fraction of full-time DBA cost.",
-        "tags": ["Monitoring", "Cost efficient"],
+        "tags": [
+          "Monitoring",
+          "Cost efficient"
+        ],
         "linkLabel": "Explore managed services",
         "linkHref": "/about-me"
       },
@@ -36,7 +42,10 @@
         "eyebrow": "CONSULTING",
         "title": "Performance & Architecture",
         "description": "Solve complex query bottlenecks and design resilient, scalable database architectures with expert guidance.",
-        "tags": ["Performance", "Design review"],
+        "tags": [
+          "Performance",
+          "Design review"
+        ],
         "linkLabel": "Talk to an expert",
         "linkHref": "/about-me"
       },
@@ -44,7 +53,10 @@
         "eyebrow": "TRAINING",
         "title": "Hands-on Team Enablement",
         "description": "Upskill teams with instructor-led, practical training sessions delivered remotely or onsite.",
-        "tags": ["Instructor-led", "Onsite or remote"],
+        "tags": [
+          "Instructor-led",
+          "Onsite or remote"
+        ],
         "linkLabel": "View training options",
         "linkHref": "/about-me"
       }
