@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Blog Post | DocFlow</title>
+  <style>body{margin:0;font-family:Inter,Arial,sans-serif;background:#0b1020;color:#eef3ff}.container{width:min(900px,calc(100% - 40px));margin:0 auto}header{padding:20px 0;border-bottom:1px solid rgba(255,255,255,.12)}a{color:#93bcff}.content{background:#121a30;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:20px;margin:22px 0}.meta{color:#95a6c5}.p{color:#b0bdd5;line-height:1.8;margin:0 0 14px}</style></head>
+  <body>
+    <header><div class="container"><a href="/blogs">← Back to Blogs</a></div></header>
+    <main class="container"><article class="content"><h1 id="title">Loading...</h1><div class="meta" id="meta"></div><div id="body"></div></article></main>
+    <script>
+      const slug=new URLSearchParams(location.search).get('slug');
+      if(!slug){document.getElementById('title').textContent='Missing slug';}
+      else{
+        fetch(`/api/blogs/${slug}`).then((r)=>r.json()).then((post)=>{
+          if(post.error){document.getElementById('title').textContent='Post not found';return;}
+          document.getElementById('title').textContent=post.title||'';
+          document.getElementById('meta').textContent=`${post.publishedAt||''} · ${post.author||''}`;
+          const body=document.getElementById('body'); body.innerHTML='';
+          if(post.contentHtml){body.innerHTML=post.contentHtml;}else{(post.content||[]).forEach((text)=>{const p=document.createElement('p');p.className='p';p.textContent=text;body.appendChild(p);});}
+        });
+      }
+    </script>
+  </body>
+</html>
