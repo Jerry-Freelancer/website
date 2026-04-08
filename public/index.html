@@ -57,7 +57,14 @@
     <main class="container">
       <section class="hero">
         <div><div class="eyebrow">DATABASE EXPERTISE</div><h1 id="heroTitle">Loading...</h1><p class="sub" id="heroDescription">Trusted support for MySQL, PostgreSQL, and MongoDB workloads.</p><div class="actions" id="deploy"><a class="btn primary" id="primaryCta" href="/health">Quick Check</a><a class="btn secondary" id="secondaryCta" href="/about-me">Hire Me for Consulting</a></div></div>
-        <aside class="panel"><strong id="tagline">WordPress content migration-ready website</strong><div class="code">git clone &lt;your-repo-url&gt;\ncd website\nnpm install\nnpm run dev</div><div class="code"># psql quick snippet\npsql -h <host> -U <user> -d <db> -c "SELECT now();"</div></aside>
+        <aside class="panel"><strong id="tagline">Core idea: Reduce unnecessary data access, maximize index usage, and avoid full table scans.</strong><div class="code">-- slow query (no index → full table scan)
+SELECT * FROM orders WHERE customer_id = 1001;
+
+-- optimization: add index
+CREATE INDEX idx_orders_customer_id ON orders(customer_id);
+
+-- same query now uses index scan (faster)
+SELECT * FROM orders WHERE customer_id = 1001;</div></aside>
       </section>
       <section id="features" class="cap-wrap"><div class="cap-label" id="capLabel">CAPABILITIES</div><h2 class="cap-heading" id="capHeading">Core database services for production workloads</h2><p class="cap-sub" id="capSub">From troubleshooting to architecture, delivered by senior database specialists.</p><div class="features" id="featureCards"></div></section>
       <section class="lists"><article class="list-card"><h3>Pages</h3><ul id="pages"></ul></article><article class="list-card"><h3>Posts</h3><ul id="posts"></ul></article></section>
