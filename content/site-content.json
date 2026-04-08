@@ -13,52 +13,52 @@
   },
   "capabilities": {
     "label": "CAPABILITIES",
-    "heading": "Core features for document workloads",
-    "subheading": "From CRUD to vector search, all in one modern database workflow.",
+    "heading": "Core database services for production workloads",
+    "subheading": "From troubleshooting to architecture, delivered by senior database specialists.",
     "cards": [
       {
-        "eyebrow": "FOUNDATION",
-        "title": "Document + SQL",
-        "description": "Work with document-style data and SQL querying in one place for flexible application development.",
+        "eyebrow": "SUPPORT",
+        "title": "24\u00d77 Database Support",
+        "description": "Resolve issues faster and keep databases and extensions healthy with continuous consultative support.",
         "tags": [
-          "Native JSON",
-          "Advanced SQL"
+          "24\u00d77",
+          "Incident response"
         ],
-        "linkLabel": "Explore foundation",
-        "linkHref": "/support-postgresql"
+        "linkLabel": "Contact support",
+        "linkHref": "/about-me"
       },
       {
-        "eyebrow": "INDEXING",
-        "title": "Rich indexing",
-        "description": "Use single-field, compound, and text indexing strategies to keep query latency predictable at scale.",
+        "eyebrow": "MANAGED SERVICES",
+        "title": "Proactive DBA Management",
+        "description": "Offload round-the-clock monitoring, maintenance, and optimization at a fraction of full-time DBA cost.",
         "tags": [
-          "Nested fields",
-          "Text + geo"
+          "Monitoring",
+          "Cost efficient"
         ],
-        "linkLabel": "See indexing tips",
-        "linkHref": "/support-mysql-mariadb"
+        "linkLabel": "Explore managed services",
+        "linkHref": "/about-me"
       },
       {
-        "eyebrow": "AI",
-        "title": "Vector search",
-        "description": "Enable semantic retrieval and similarity search patterns for AI-powered application experiences.",
+        "eyebrow": "CONSULTING",
+        "title": "Performance & Architecture",
+        "description": "Solve complex query bottlenecks and design resilient, scalable database architectures with expert guidance.",
         "tags": [
-          "Embeddings",
-          "Similarity"
+          "Performance",
+          "Design review"
         ],
-        "linkLabel": "Explore AI",
-        "linkHref": "/support-mongodb"
+        "linkLabel": "Talk to an expert",
+        "linkHref": "/about-me"
       },
       {
-        "eyebrow": "OPEN SOURCE",
-        "title": "Open and secure",
-        "description": "Deploy in your preferred environment with secure-by-default practices and transparent operations.",
+        "eyebrow": "TRAINING",
+        "title": "Hands-on Team Enablement",
+        "description": "Upskill teams with instructor-led, practical training sessions delivered remotely or onsite.",
         "tags": [
-          "Open stack",
-          "Secure auth"
+          "Instructor-led",
+          "Onsite or remote"
         ],
-        "linkLabel": "View deployment options",
-        "linkHref": "/support-postgresql"
+        "linkLabel": "View training options",
+        "linkHref": "/about-me"
       }
     ]
   },
