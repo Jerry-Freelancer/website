@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DocFlow - Modern Docs Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root { --bg:#0b1020; --panel:#121a30; --text:#eef3ff; --muted:#a9b3cc; --accent:#6b8cff; --accent-2:#58e1ff; --line:rgba(255,255,255,.12);}*{box-sizing:border-box}
+      body{margin:0;font-family:Inter,sans-serif;color:var(--text);background:radial-gradient(circle at 10% 20%,rgba(88,225,255,.2),transparent 25%),radial-gradient(circle at 85% 10%,rgba(107,140,255,.3),transparent 30%),var(--bg)}
+      .container{width:min(1200px,calc(100% - 40px));margin:0 auto} header{padding:24px 0;border-bottom:1px solid var(--line)}
+      .nav{display:flex;justify-content:space-between;align-items:center}.logo{font-weight:800}.logo span{color:var(--accent-2)}
+      .menu{display:flex;align-items:center;gap:20px}.menu>a,.dropbtn{color:var(--muted);text-decoration:none;font-weight:600;background:none;border:none;font:inherit;cursor:pointer}
+      .dropdown{position:relative;padding-bottom:14px;margin-bottom:-14px}.dropdown-menu{position:absolute;top:calc(100% + 2px);left:0;min-width:220px;background:#10172a;border:1px solid var(--line);border-radius:10px;padding:8px;z-index:10;opacity:0;transform:translateY(6px) scale(.98);pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+      .dropdown-menu a{display:block;color:#d7e6ff;text-decoration:none;padding:10px 12px;border-radius:8px}.dropdown-menu a:hover{background:rgba(107,140,255,.2)}
+      .dropdown:hover .dropdown-menu,.dropdown.open .dropdown-menu,.dropdown:focus-within .dropdown-menu{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+
+      .hero{padding:88px 0 56px;display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center}
+      h1{margin:0 0 18px;font-size:clamp(2.2rem,4.2vw,4rem);line-height:1.08;max-width:18ch}.sub{margin:0 0 28px;color:var(--muted);font-size:1.08rem;max-width:58ch}.eyebrow{color:#7cb5ff;letter-spacing:.16em;font-weight:700;font-size:.84rem;margin-bottom:10px}
+      .actions{display:flex;gap:12px;flex-wrap:wrap}.btn{border:1px solid transparent;border-radius:10px;padding:12px 18px;font-weight:700;font-size:.95rem;text-decoration:none;display:inline-block}
+      .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#091022}.btn.secondary{background:transparent;color:var(--text);border-color:var(--line)}
+      .panel{background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 20px 40px rgba(0,0,0,.35)}
+      .code{margin-top:12px;padding:12px;border-radius:10px;background:rgba(5,10,20,.7);border:1px solid var(--line);font-family:ui-monospace,monospace;font-size:.9rem;color:#9ed7ff;white-space:pre-wrap}
+      .cap-wrap{padding:10px 0 26px}.cap-label{letter-spacing:.18em;color:#7cb5ff;font-weight:700;font-size:.9rem}.cap-heading{font-size:clamp(2rem,3.5vw,3.6rem);max-width:760px;margin:.3rem 0}.cap-sub{color:var(--muted);font-size:1.2rem;margin:0 0 28px}
+      .features{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding-bottom:56px}.feature{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:24px;min-height:320px;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}.feature:hover{transform:translateY(-6px);border-color:rgba(88,225,255,.65);box-shadow:0 16px 36px rgba(25,89,160,.24)}
+      .feature .kicker{letter-spacing:.15em;color:#7cb5ff;font-weight:700;font-size:.85rem;margin-bottom:10px}.feature h3{font-size:2rem;margin:0 0 12px}.feature p{color:var(--muted);line-height:1.55;margin:0 0 18px}
+      .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}.chip{border:1px solid rgba(255,255,255,.14);padding:6px 11px;border-radius:999px;color:#d7e6ff;font-size:.86rem;background:rgba(255,255,255,.04)}.feature a{display:inline-block;margin-top:14px;color:#7cb5ff;font-weight:700;text-decoration:none}
+      .lists{padding-bottom:80px;display:grid;gap:16px;grid-template-columns:1fr 1fr}.list-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}.list-card li{color:var(--muted);margin-bottom:8px}
+      footer{border-top:1px solid var(--line);color:var(--muted);padding:20px 0 30px}
+      @media (max-width:1100px){.features{grid-template-columns:repeat(2,1fr)}}
+      @media (max-width:900px){.hero{grid-template-columns:1fr;padding-top:56px}.features,.lists{grid-template-columns:1fr}.menu{gap:10px;flex-wrap:wrap}}
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="logo" id="siteName">Doc<span>Flow</span></div>
+        <nav class="menu">
+          <a href="#features">Services</a>
+          <a href="/blogs">Blogs</a>
+          <div class="dropdown">
+            <button class="dropbtn">Support and Services ▾</button>
+            <div class="dropdown-menu">
+              <a href="/support-postgresql">PostgreSQL</a>
+              <a href="/support-mysql-mariadb">MySQL/MariaDB</a>
+              <a href="/support-mongodb">MongoDB</a>
+            </div>
+          </div>
+          <a href="/about-me">About Me</a>
+          <a href="/health">Health</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div><div class="eyebrow">DATABASE EXPERTISE</div><h1 id="heroTitle">Loading...</h1><p class="sub" id="heroDescription">Trusted support for MySQL, PostgreSQL, and MongoDB workloads.</p><div class="actions" id="deploy"><a class="btn primary" id="primaryCta" href="/health">Quick Check</a><a class="btn secondary" id="secondaryCta" href="/about-me">Hire Me for Consulting</a></div></div>
+        <aside class="panel"><strong id="tagline">Core idea: Reduce unnecessary data access, maximize index usage, and avoid full table scans.</strong><div class="code">-- slow query (no index → full table scan)
+SELECT * FROM orders WHERE customer_id = 1001;
+
+-- optimization: add index
+CREATE INDEX idx_orders_customer_id ON orders(customer_id);
+
+-- same query now uses index scan (faster)
+SELECT * FROM orders WHERE customer_id = 1001;</div></aside>
+      </section>
+      <section id="features" class="cap-wrap"><div class="cap-label" id="capLabel">CAPABILITIES</div><h2 class="cap-heading" id="capHeading">Core database services for production workloads</h2><p class="cap-sub" id="capSub">From troubleshooting to architecture, delivered by senior database specialists.</p><div class="features" id="featureCards"></div></section>
+      <section class="lists"><article class="list-card"><h3>Pages</h3><ul id="pages"></ul></article><article class="list-card"><h3>Posts</h3><ul id="posts"></ul></article></section>
+    </main>
+    <footer><div class="container">© 2026 DocFlow MVP · Built with Node.js</div></footer>
+
+    <script>
+      const fillList=(id,items)=>{const el=document.getElementById(id);el.innerHTML='';if(!items||items.length===0){el.innerHTML='<li>No content yet</li>';return;}items.slice(0,12).forEach((item)=>{const li=document.createElement('li');li.textContent=`${item.title} - ${item.excerpt||''}`;el.appendChild(li);});};
+      const renderCards=(cards)=>{const wrap=document.getElementById('featureCards');wrap.innerHTML='';(cards||[]).forEach((card)=>{const el=document.createElement('article');el.className='feature';const tags=(card.tags||[]).map((t)=>`<span class="chip">${t}</span>`).join('');el.innerHTML=`<div class="kicker">${card.eyebrow||''}</div><h3>${card.title||''}</h3><p>${card.description||''}</p><div class="chips">${tags}</div><a href="${card.linkHref||'/about-me'}">${card.linkLabel||'Learn more'}</a>`;wrap.appendChild(el);});};
+      fetch('/api/content').then((r)=>r.json()).then((data)=>{document.getElementById('siteName').innerHTML=`${data.siteName||'Doc'}<span>Flow</span>`;document.getElementById('tagline').textContent=data.tagline||'';document.getElementById('heroTitle').textContent=data.heroTitle||'';document.getElementById('heroDescription').textContent=data.heroDescription||'';const p=document.getElementById('primaryCta'); p.textContent=data?.primaryCta?.label||'Quick Check'; p.href=data?.primaryCta?.href||'/health';const s=document.getElementById('secondaryCta'); s.textContent=data?.secondaryCta?.label||'Hire Me for Consulting'; s.href=data?.secondaryCta?.href||'/about-me';const cap=data.capabilities||{};document.getElementById('capLabel').textContent=cap.label||'CAPABILITIES';document.getElementById('capHeading').textContent=cap.heading||'Core database services for production workloads';document.getElementById('capSub').textContent=cap.subheading||'';renderCards(cap.cards||[]);fillList('pages',data.pages||[]); fillList('posts',data.posts||[]);}).catch(()=>{document.getElementById('heroTitle').textContent='Failed to load migrated content';document.getElementById('heroDescription').textContent='Please confirm /api/content is reachable.';});
+    
+      </script>
+  </body>
+</html>
