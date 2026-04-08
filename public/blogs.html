@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogs | DocFlow</title>
+    <style>
+      body{margin:0;font-family:Inter,Arial,sans-serif;background:#0b1020;color:#eef3ff} .container{width:min(1120px,calc(100% - 40px));margin:0 auto}
+      header{padding:20px 0;border-bottom:1px solid rgba(255,255,255,.12)} a{color:#93bcff;text-decoration:none}
+      .menu{display:flex;gap:18px;align-items:center}.dropdown{position:relative;padding-bottom:14px;margin-bottom:-14px}.dropdown-menu{position:absolute;top:calc(100% + 2px);left:0;opacity:0;transform:translateY(6px);pointer-events:none;transition:.2s;background:#10172a;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px}.dropdown:hover .dropdown-menu,.dropdown.open .dropdown-menu{opacity:1;transform:translateY(0);pointer-events:auto}.dropdown-menu a{display:block;padding:8px}
+      h1{font-size:clamp(2rem,4vw,3.4rem)} .sub{color:#a9b3cc}
+      .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:12px 0 50px}
+      .card{background:#121a30;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px;transition:.2s}.card:hover{transform:translateY(-5px);border-color:#5e95ff}
+      .meta{font-size:.86rem;color:#95a6c5}.tags{display:flex;gap:8px;flex-wrap:wrap}.tag{font-size:.8rem;padding:5px 10px;border:1px solid rgba(255,255,255,.18);border-radius:999px;color:#d0e2ff}
+      @media (max-width:1000px){.grid{grid-template-columns:1fr 1fr}} @media (max-width:760px){.grid{grid-template-columns:1fr}}
+    </style>
+  </head>
+  <body>
+    <header><div class="container menu"><a href="/">Home</a><a href="/blogs">Blogs</a><div class="dropdown"><span style="cursor:pointer;color:#a9b3cc">Support and Services ▾</span><div class="dropdown-menu"><a href="/support-postgresql">PostgreSQL</a><a href="/support-mysql-mariadb">MySQL/MariaDB</a><a href="/support-mongodb">MongoDB</a></div></div><a href="/about-me">About Me</a></div></header>
+    <main class="container">
+      <h1>DocFlow Blogs</h1>
+      <p class="sub">Write, publish, and manage technical blog posts from local JSON files.</p>
+      <section class="grid" id="blogGrid"></section>
+    </main>
+    <script>
+      fetch('/api/blogs').then((r)=>r.json()).then((posts)=>{
+        const grid=document.getElementById('blogGrid'); grid.innerHTML='';
+        if(!posts.length){grid.innerHTML='<p class="sub">No published posts yet.</p>';return;}
+        posts.forEach((post)=>{
+          const tags=(post.tags||[]).map((t)=>`<span class="tag">${t}</span>`).join('');
+          const card=document.createElement('article'); card.className='card';
+          card.innerHTML=`<div class="meta">${post.publishedAt||''} · ${post.author||''}</div><h3><a href="/blog?slug=${post.slug}">${post.title}</a></h3><p class="sub">${post.excerpt||''}</p><div class="tags">${tags}</div>`;
+          grid.appendChild(card);
+        });
+      });
+      const d=document.querySelector('.dropdown');const b=document.querySelector('.dropdown span');if(d&&b){b.addEventListener('click',(e)=>{e.preventDefault();d.classList.toggle('open');});document.addEventListener('click',(e)=>{if(!d.contains(e.target))d.classList.remove('open');});}
+    </script>
+  </body>
+</html>

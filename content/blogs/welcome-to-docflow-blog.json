@@ -1,0 +1,13 @@
+{
+  "slug": "welcome-to-docflow-blog",
+  "title": "Welcome to the DocFlow Blog",
+  "author": "DocFlow Team",
+  "publishedAt": "2026-04-07",
+  "status": "published",
+  "tags": ["announcement", "blog"],
+  "content": [
+    "This blog feature is inspired by the clean card-and-list experience used on documentdb.io/blogs.",
+    "Write new posts as JSON files under content/blogs, then publish them so they appear automatically on the /blogs page.",
+    "Use the helper scripts in scripts/new-blog.js and scripts/publish-blog.js to create and publish posts quickly."
+  ]
+}
