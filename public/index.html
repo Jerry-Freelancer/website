@@ -35,6 +35,20 @@
       .trust-item:last-child{border-right:none}
       .trust-item h3{font-size:1.05rem;line-height:1.3;margin:0 0 10px;text-align:center}
       .trust-item p{margin:0;color:var(--muted);text-align:center;line-height:1.6;font-size:.95rem}
+      .quickstart{padding:22px 22px 20px;background:linear-gradient(180deg,#151d31,#0f1526)}
+      .quickstart h3{margin:14px 0 8px;font-size:2rem}
+      .quickstart .sub{margin:0 0 14px}
+      .qs-tabs{display:flex;gap:10px;flex-wrap:wrap}
+      .qs-tab{border:1px solid rgba(110,168,255,.45);background:rgba(18,40,74,.42);color:#b8d6ff;padding:8px 14px;border-radius:999px;font-weight:700;cursor:pointer}
+      .qs-tab.active{background:#1f4f8f;color:#fff;border-color:#73b0ff}
+      .qs-code-wrap{border:1px solid rgba(255,255,255,.14);border-radius:12px;overflow:hidden;background:#070b14;margin:12px 0}
+      .qs-code-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.1);font-weight:700;color:#9db0cc}
+      .copy-btn{border:1px solid rgba(255,255,255,.25);background:transparent;color:#d9e6ff;border-radius:8px;padding:6px 10px;cursor:pointer}
+      .qs-code{margin:0;padding:14px;color:#20e3a2;font-family:ui-monospace,monospace;white-space:pre-wrap;line-height:1.6}
+      .qs-steps{list-style:none;padding:0;margin:0;border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden}
+      .qs-steps li{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+      .qs-steps li:first-child{border-top:none}
+      .qs-num{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;border:1px solid rgba(116,175,255,.55);color:#8fc1ff;font-weight:700}
       footer{border-top:1px solid var(--line);color:var(--muted);padding:20px 0 30px}
       @media (max-width:1100px){.features{grid-template-columns:repeat(2,1fr)}}
       @media (max-width:900px){.hero{grid-template-columns:1fr;padding-top:56px}.features,.lists{grid-template-columns:1fr}.menu{gap:10px;flex-wrap:wrap}.trust-grid{grid-template-columns:1fr}.trust-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.12);padding:14px 0}.trust-item:last-child{border-bottom:none}}
@@ -64,37 +78,20 @@
     <main class="container">
       <section class="hero">
         <div><div class="eyebrow">DATABASE EXPERTISE</div><h1 id="heroTitle">Loading...</h1><p class="sub" id="heroDescription">Trusted support for MySQL, PostgreSQL, and MongoDB workloads.</p><div class="actions" id="deploy"><a class="btn primary" id="primaryCta" href="/health">Quick Check</a><a class="btn secondary" id="secondaryCta" href="/about-me">Hire Me for Consulting</a></div></div>
-        <aside class="panel"><strong id="tagline">Database Performance Optimization Guide</strong><div class="code">1. Identify Bottlenecks
-Pinpoint issues with monitoring tools before altering configurations.
-
-Slow Query Logs: Isolate and analyze queries taking longer than 1 second.
-
-Resource Monitoring: Determine if CPU spikes are from full table scans or if I/O blockages are causing delays.
-
-2. Index Optimization
-Usually the fastest way to improve performance.
-
-Leftmost Prefix Rule: Ensure query conditions match composite indexes (e.g., a, b, c) strictly from left to right.
-
-Prevent Index Failure: Do not use functions on indexed columns in WHERE clauses (e.g., DATE(time)), as this forces full table scans.
-
-Use Covering Indexes: Select only fields present in the index to avoid costly table lookups.
-
-3. Query Rewriting
-
-Avoid SELECT *: Query only necessary fields to reduce memory and network overhead.
-
-Optimize Deep Pagination: Replace inefficient LIMIT offsets (e.g., LIMIT 1000000, 10) with cursor-based pagination (e.g., WHERE id > last_id LIMIT 10).
-
-Break Down Complex SQL: Split massive JOINs and heavy subqueries into smaller, simpler queries, and assemble the data in the application layer.
-
-4. Architecture & Configuration
-
-Caching Layer: Use Redis to intercept high-frequency, rarely changing read requests.
-
-Connection Pools: Properly configure Max Active and Min Idle limits to prevent the overhead of constantly creating/destroying connections.
-
-Read/Write Splitting: Route write operations to the primary node and read operations to replicas to distribute the load.</div></aside>
+        <aside class="panel quickstart" id="quickstartCard">
+          <div class="qs-tabs" role="tablist" aria-label="Database quick start">
+            <button class="qs-tab active" data-db="postgresql">PostgreSQL</button>
+            <button class="qs-tab" data-db="mysql">MySQL</button>
+            <button class="qs-tab" data-db="mongodb">MongoDB</button>
+          </div>
+          <h3 id="qsTitle">Run PostgreSQL locally with Docker</h3>
+          <p class="sub" id="qsSubtitle">Start a local PostgreSQL instance, then connect with your client on port 5432.</p>
+          <div class="qs-code-wrap">
+            <div class="qs-code-head"><span>DOCKER</span><button id="copyCmd" class="copy-btn">Copy</button></div>
+            <pre class="qs-code" id="qsCode"></pre>
+          </div>
+          <ol class="qs-steps" id="qsSteps"></ol>
+        </aside>
       </section>
       <section id="features" class="cap-wrap"><div class="cap-label" id="capLabel">CAPABILITIES</div><h2 class="cap-heading" id="capHeading">Core database services for production workloads</h2><p class="cap-sub" id="capSub">From troubleshooting to architecture, delivered by senior database specialists.</p><div class="features" id="featureCards"></div></section>
       <section class="trust-strip">
@@ -114,6 +111,39 @@ Read/Write Splitting: Route write operations to the primary node and read operat
     <script>
       const fillList=(id,items)=>{const el=document.getElementById(id);el.innerHTML='';if(!items||items.length===0){el.innerHTML='<li>No content yet</li>';return;}items.slice(0,12).forEach((item)=>{const li=document.createElement('li');li.textContent=`${item.title} - ${item.excerpt||''}`;el.appendChild(li);});};
       const renderCards=(cards)=>{const wrap=document.getElementById('featureCards');wrap.innerHTML='';(cards||[]).forEach((card)=>{const el=document.createElement('article');el.className='feature';const tags=(card.tags||[]).map((t)=>`<span class="chip">${t}</span>`).join('');el.innerHTML=`<div class="kicker">${card.eyebrow||''}</div><h3>${card.title||''}</h3><p>${card.description||''}</p><div class="chips">${tags}</div><a href="${card.linkHref||'/about-me'}">${card.linkLabel||'Learn more'}</a>`;wrap.appendChild(el);});};
+
+      const quickstartData={
+        postgresql:{title:'Run PostgreSQL locally with Docker',subtitle:'Start a local PostgreSQL instance, then connect with your client on port 5432.',code:`docker run -d --name postgres-local \
+  -e POSTGRES_USER=admin \
+  -e POSTGRES_PASSWORD=strongpass \
+  -e POSTGRES_DB=appdb \
+  -p 5432:5432 \
+  postgres:16`,steps:['Run PostgreSQL container with Docker.','Connect using psql, DBeaver, or your application on port 5432.','Persist data with a volume and tune memory/work_mem settings as needed.']},
+        mysql:{title:'Run MySQL locally with Docker',subtitle:'Launch MySQL fast for development and connect on port 3306.',code:`docker run -d --name mysql-local \
+  -e MYSQL_ROOT_PASSWORD=strongpass \
+  -e MYSQL_DATABASE=appdb \
+  -e MYSQL_USER=appuser \
+  -e MYSQL_PASSWORD=apppass \
+  -p 3306:3306 \
+  mysql:8.4`,steps:['Start MySQL container and wait for health readiness.','Connect from mysql shell or your application on port 3306.','Add indexes and slow-query logging to optimize early.']},
+        mongodb:{title:'Run MongoDB locally with Docker',subtitle:'Boot MongoDB in seconds and access it on port 27017.',code:`docker run -d --name mongo-local \
+  -e MONGO_INITDB_ROOT_USERNAME=admin \
+  -e MONGO_INITDB_ROOT_PASSWORD=strongpass \
+  -p 27017:27017 \
+  mongo:8`,steps:['Start MongoDB container for local development.','Connect with mongosh or your application on port 27017.','Create indexes and enable authentication for production-like testing.']}
+      };
+
+      const qsTitle=document.getElementById('qsTitle');
+      const qsSubtitle=document.getElementById('qsSubtitle');
+      const qsCode=document.getElementById('qsCode');
+      const qsSteps=document.getElementById('qsSteps');
+      const copyBtn=document.getElementById('copyCmd');
+      const qsTabs=[...document.querySelectorAll('.qs-tab')];
+
+      const renderQuickstart=(db)=>{const data=quickstartData[db];if(!data)return;qsTitle.textContent=data.title;qsSubtitle.textContent=data.subtitle;qsCode.textContent=data.code;qsSteps.innerHTML='';data.steps.forEach((step,idx)=>{const li=document.createElement('li');li.innerHTML=`<span class="qs-num">${String(idx+1).padStart(2,'0')}</span><span>${step}</span>`;qsSteps.appendChild(li);});qsTabs.forEach((t)=>t.classList.toggle('active',t.dataset.db===db));};
+      qsTabs.forEach((tab)=>tab.addEventListener('click',()=>renderQuickstart(tab.dataset.db)));
+      if(copyBtn){copyBtn.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(qsCode.textContent);copyBtn.textContent='Copied';setTimeout(()=>{copyBtn.textContent='Copy';},1200);}catch(_e){copyBtn.textContent='Copy failed';setTimeout(()=>{copyBtn.textContent='Copy';},1200);}})}
+      renderQuickstart('postgresql');
       fetch('/api/content').then((r)=>r.json()).then((data)=>{document.getElementById('siteName').innerHTML=`${data.siteName||'Doc'}<span>Flow</span>`;document.getElementById('tagline').textContent=data.tagline||'';document.getElementById('heroTitle').textContent=data.heroTitle||'';document.getElementById('heroDescription').textContent=data.heroDescription||'';const p=document.getElementById('primaryCta'); p.textContent=data?.primaryCta?.label||'Quick Check'; p.href=data?.primaryCta?.href||'/health';const s=document.getElementById('secondaryCta'); s.textContent=data?.secondaryCta?.label||'Hire Me for Consulting'; s.href=data?.secondaryCta?.href||'/about-me';const cap=data.capabilities||{};document.getElementById('capLabel').textContent=cap.label||'CAPABILITIES';document.getElementById('capHeading').textContent=cap.heading||'Core database services for production workloads';document.getElementById('capSub').textContent=cap.subheading||'';renderCards(cap.cards||[]);fillList('pages',data.pages||[]); fillList('posts',data.posts||[]);}).catch(()=>{document.getElementById('heroTitle').textContent='Failed to load migrated content';document.getElementById('heroDescription').textContent='Please confirm /api/content is reachable.';});
     
       </script>
