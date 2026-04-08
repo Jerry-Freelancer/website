@@ -1,0 +1,67 @@
+{
+  "siteName": "DocFlow",
+  "tagline": "WordPress content migration-ready website",
+  "heroTitle": "Senior Database Consulting for High-Stakes Production Systems",
+  "heroDescription": "From emergency incident response to long-term architecture hardening, get direct expert help across PostgreSQL, MySQL/MariaDB, and MongoDB.",
+  "primaryCta": {
+    "label": "Quick Check",
+    "href": "/health"
+  },
+  "secondaryCta": {
+    "label": "Hire Me for Consulting",
+    "href": "/about-me"
+  },
+  "capabilities": {
+    "label": "CAPABILITIES",
+    "heading": "Core features for document workloads",
+    "subheading": "From CRUD to vector search, all in one modern database workflow.",
+    "cards": [
+      {
+        "eyebrow": "FOUNDATION",
+        "title": "Document + SQL",
+        "description": "Work with document-style data and SQL querying in one place for flexible application development.",
+        "tags": [
+          "Native JSON",
+          "Advanced SQL"
+        ],
+        "linkLabel": "Explore foundation",
+        "linkHref": "/support-postgresql"
+      },
+      {
+        "eyebrow": "INDEXING",
+        "title": "Rich indexing",
+        "description": "Use single-field, compound, and text indexing strategies to keep query latency predictable at scale.",
+        "tags": [
+          "Nested fields",
+          "Text + geo"
+        ],
+        "linkLabel": "See indexing tips",
+        "linkHref": "/support-mysql-mariadb"
+      },
+      {
+        "eyebrow": "AI",
+        "title": "Vector search",
+        "description": "Enable semantic retrieval and similarity search patterns for AI-powered application experiences.",
+        "tags": [
+          "Embeddings",
+          "Similarity"
+        ],
+        "linkLabel": "Explore AI",
+        "linkHref": "/support-mongodb"
+      },
+      {
+        "eyebrow": "OPEN SOURCE",
+        "title": "Open and secure",
+        "description": "Deploy in your preferred environment with secure-by-default practices and transparent operations.",
+        "tags": [
+          "Open stack",
+          "Secure auth"
+        ],
+        "linkLabel": "View deployment options",
+        "linkHref": "/support-postgresql"
+      }
+    ]
+  },
+  "pages": [],
+  "posts": []
+}
