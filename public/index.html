@@ -64,14 +64,37 @@
     <main class="container">
       <section class="hero">
         <div><div class="eyebrow">DATABASE EXPERTISE</div><h1 id="heroTitle">Loading...</h1><p class="sub" id="heroDescription">Trusted support for MySQL, PostgreSQL, and MongoDB workloads.</p><div class="actions" id="deploy"><a class="btn primary" id="primaryCta" href="/health">Quick Check</a><a class="btn secondary" id="secondaryCta" href="/about-me">Hire Me for Consulting</a></div></div>
-        <aside class="panel"><strong id="tagline">Core idea: Reduce unnecessary data access, maximize index usage, and avoid full table scans.</strong><div class="code">-- slow query (no index → full table scan)
-SELECT * FROM orders WHERE customer_id = 1001;
+        <aside class="panel"><strong id="tagline">Database Performance Optimization Guide</strong><div class="code">1. Identify Bottlenecks
+Pinpoint issues with monitoring tools before altering configurations.
 
--- optimization: add index
-CREATE INDEX idx_orders_customer_id ON orders(customer_id);
+Slow Query Logs: Isolate and analyze queries taking longer than 1 second.
 
--- same query now uses index scan (faster)
-SELECT * FROM orders WHERE customer_id = 1001;</div></aside>
+Resource Monitoring: Determine if CPU spikes are from full table scans or if I/O blockages are causing delays.
+
+2. Index Optimization
+Usually the fastest way to improve performance.
+
+Leftmost Prefix Rule: Ensure query conditions match composite indexes (e.g., a, b, c) strictly from left to right.
+
+Prevent Index Failure: Do not use functions on indexed columns in WHERE clauses (e.g., DATE(time)), as this forces full table scans.
+
+Use Covering Indexes: Select only fields present in the index to avoid costly table lookups.
+
+3. Query Rewriting
+
+Avoid SELECT *: Query only necessary fields to reduce memory and network overhead.
+
+Optimize Deep Pagination: Replace inefficient LIMIT offsets (e.g., LIMIT 1000000, 10) with cursor-based pagination (e.g., WHERE id > last_id LIMIT 10).
+
+Break Down Complex SQL: Split massive JOINs and heavy subqueries into smaller, simpler queries, and assemble the data in the application layer.
+
+4. Architecture & Configuration
+
+Caching Layer: Use Redis to intercept high-frequency, rarely changing read requests.
+
+Connection Pools: Properly configure Max Active and Min Idle limits to prevent the overhead of constantly creating/destroying connections.
+
+Read/Write Splitting: Route write operations to the primary node and read operations to replicas to distribute the load.</div></aside>
       </section>
       <section id="features" class="cap-wrap"><div class="cap-label" id="capLabel">CAPABILITIES</div><h2 class="cap-heading" id="capHeading">Core database services for production workloads</h2><p class="cap-sub" id="capSub">From troubleshooting to architecture, delivered by senior database specialists.</p><div class="features" id="featureCards"></div></section>
       <section class="trust-strip">
