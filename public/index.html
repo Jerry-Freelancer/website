@@ -84,8 +84,8 @@
             <button class="qs-tab" data-db="mysql">MySQL</button>
             <button class="qs-tab" data-db="mongodb">MongoDB</button>
           </div>
-          <h3 id="qsTitle">Run PostgreSQL locally with Docker</h3>
-          <p class="sub" id="qsSubtitle">Start a local PostgreSQL instance, then connect with your client on port 5432.</p>
+          <h3 id="qsTitle">work_mem – Quick Guide</h3>
+          <p class="sub" id="qsSubtitle">Purpose: controls memory used by each sort/hash operation, affecting disk spill and query performance.</p>
           <div class="qs-code-wrap">
             <div class="qs-code-head"><span>DOCKER</span><button id="copyCmd" class="copy-btn">Copy</button></div>
             <pre class="qs-code" id="qsCode"></pre>
@@ -121,24 +121,22 @@
       ];
 
       const quickstartData={
-        postgresql:{title:'Run PostgreSQL locally with Docker',subtitle:'Start a local PostgreSQL instance, then connect with your client on port 5432.',code:`docker run -d --name postgres-local \
-  -e POSTGRES_USER=admin \
-  -e POSTGRES_PASSWORD=strongpass \
-  -e POSTGRES_DB=appdb \
-  -p 5432:5432 \
-  postgres:16`,steps:['Run PostgreSQL container with Docker.','Connect using psql, DBeaver, or your application on port 5432.','Persist data with a volume and tune memory/work_mem settings as needed.']},
-        mysql:{title:'Run MySQL locally with Docker',subtitle:'Launch MySQL fast for development and connect on port 3306.',code:`docker run -d --name mysql-local \
-  -e MYSQL_ROOT_PASSWORD=strongpass \
-  -e MYSQL_DATABASE=appdb \
-  -e MYSQL_USER=appuser \
-  -e MYSQL_PASSWORD=apppass \
-  -p 3306:3306 \
-  mysql:8.4`,steps:['Start MySQL container and wait for health readiness.','Connect from mysql shell or your application on port 3306.','Add indexes and slow-query logging to optimize early.']},
-        mongodb:{title:'Run MongoDB locally with Docker',subtitle:'Boot MongoDB in seconds and access it on port 27017.',code:`docker run -d --name mongo-local \
-  -e MONGO_INITDB_ROOT_USERNAME=admin \
-  -e MONGO_INITDB_ROOT_PASSWORD=strongpass \
-  -p 27017:27017 \
-  mongo:8`,steps:['Start MongoDB container for local development.','Connect with mongosh or your application on port 27017.','Create indexes and enable authentication for production-like testing.']}
+        postgresql:{title:'work_mem – Quick Guide',subtitle:'Purpose: controls memory used by each sort/hash operation, affecting disk spill and query performance.',code:`-- Session level (recommended for tuning)
+SET work_mem = '64MB';
+
+-- Global level (use with caution)
+ALTER SYSTEM SET work_mem = '32MB';
+SELECT pg_reload_conf();`,steps:['OLTP: 4MB ~ 32MB','OLAP / Reporting: 64MB ~ 256MB','Use EXPLAIN ANALYZE to detect disk-based operations, then adjust incrementally. 👉 Core idea: keep sort/hash operations in memory, but avoid excessive memory usage under high concurrency.']},
+        mysql:{title:'sort_buffer_size – Quick Guide',subtitle:'Purpose: controls memory per-session for sort operations, helping reduce on-disk temp sorting.',code:`-- Session level (recommended for tuning)
+SET SESSION sort_buffer_size = 4*1024*1024;
+
+-- Global level (use with caution)
+SET GLOBAL sort_buffer_size = 8*1024*1024;`,steps:['OLTP: 1MB ~ 4MB','Reporting / heavier sorting: 8MB ~ 32MB','Check EXPLAIN and status metrics (Sort_merge_passes, Created_tmp_disk_tables), then tune gradually. 👉 Core idea: keep sort operations efficient without over-allocating memory per connection.']},
+        mongodb:{title:'wiredTiger cacheSizeGB – Quick Guide',subtitle:'Purpose: defines WiredTiger cache memory used for hot data and indexes, impacting read/write latency.',code:`# mongod.conf
+storage:
+  wiredTiger:
+    engineConfig:
+      cacheSizeGB: 8`,steps:['Start with available RAM and reserve memory for OS + other services.','For mixed workloads, monitor cache eviction and page faults before increasing.','Validate with MongoDB metrics (cache usage/evictions) and tune conservatively. 👉 Core idea: keep active working set in memory while preserving system stability under concurrency.']}
       };
 
       const qsTitle=document.getElementById('qsTitle');
