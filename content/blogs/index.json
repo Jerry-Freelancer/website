@@ -1,0 +1,11 @@
+[
+  {
+    "slug": "welcome-to-docflow-blog",
+    "title": "Welcome to the DocFlow Blog",
+    "excerpt": "How this lightweight blog system works and how to publish your first post.",
+    "author": "DocFlow Team",
+    "publishedAt": "2026-04-07",
+    "tags": ["announcement", "blog"],
+    "status": "published"
+  }
+]
