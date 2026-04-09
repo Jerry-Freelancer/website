@@ -1,0 +1,17 @@
+{
+  "name": "documentdb-style-mvp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MVP landing page inspired by documentdb.io style using Node.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "blog:new": "node scripts/new-blog.js",
+    "blog:publish": "node scripts/publish-blog.js",
+    "blog:publish:md": "node scripts/publish-markdown.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
