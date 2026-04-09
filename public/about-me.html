@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Me - Database Expert</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #0b1020;
+        --panel: #121a30;
+        --text: #eef3ff;
+        --muted: #a9b3cc;
+        --line: rgba(255, 255, 255, 0.12);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 10% 20%, rgba(88, 225, 255, 0.2), transparent 25%),
+          radial-gradient(circle at 85% 10%, rgba(107, 140, 255, 0.3), transparent 30%),
+          var(--bg);
+      }
+      .container { width: min(1040px, calc(100% - 40px)); margin: 0 auto; }
+      header { padding: 24px 0; border-bottom: 1px solid var(--line); }
+      .nav { display: flex; justify-content: space-between; align-items: center; }
+      .nav a { color: var(--muted); text-decoration: none; margin-left: 18px; font-weight: 600; }
+      .logo { font-weight: 800; }
+      .logo span { color: #58e1ff; }
+      main { padding: 42px 0 64px; }
+      .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+      h1 { margin-top: 0; }
+      h2 { margin-bottom: 10px; }
+      p, li { color: var(--muted); line-height: 1.7; }
+      ul { margin: 0; padding-left: 18px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="logo">Doc<span>Flow</span></div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/support-postgresql">PostgreSQL</a>
+          <a href="/support-mysql-mariadb">MySQL/MariaDB</a>
+          <a href="/support-mongodb">MongoDB</a>
+          <a href="/about-me">About Me</a>
+          <a href="/health">Health</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h1>About Me</h1>
+        <p>
+          Are you in need of an experienced database expert to tackle the complexities of managing and optimizing your
+          databases? With over 12 years of experiment across multiple database systems, I’m here to deliver top-notch
+          solutions tailored to your needs, including database installation, backup and recovery, high availability,
+          disaster recovery, performance optimization, data rescue and so on.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>🔍 Database Expertise</h2>
+        <p>
+          With over 12 years as a senior expert in MySQL/MariaDB/Percona/PostgreSQL/MongoDB/Oracle/DuckDB, I’ve managed
+          over 5000 databases and 300 TB+ of data. My experience covers database architecture, performance optimization,
+          backup and recovery, High availability, disaster recovery, and much more. I ensure every database solution I
+          deliver is robust, scalable, high performance, and perfectly aligned with your business needs.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>🛠️ Technology Stack</h2>
+        <ul>
+          <li>
+            MySQL/MariaDB/Percona (Versions 5-9): Installation、High Availability, Replication, and Scalability
+            Solutions、InnoDB Cluster、Group Replication、Workbench/Shell/Router、Backup & Restore、Galera
+            Cluster、Percona XtraDB Cluster、XtraBackup、Toolkit、InnoDB/MyISAM/Binlog.
+          </li>
+          <li>
+            PostgreSQL (Versions 9-17): Installation、High Availability, Replication, and Scalability Solutions、SQL
+            Tuning、pgpool-II、PostGIS、Patroni、Citus、pgvector、Security.
+          </li>
+          <li>
+            MongoDB (Versions 4-8): Installation、MongoDB Shell (mongosh)、Aggregation、Indexes、Atlas、Time
+            Series、Change Streams、Replication、Sharding、Storage、Administration、Security.
+          </li>
+          <li>Other Database : Oracle、DB2、Redis、DuckDB.</li>
+          <li>
+            Cloud service providers: AWS、GCP、Azure. Certifications: I hold certifications from Cisco, Oracle, MySQL,
+            AWS, ITIL, PMP, and TOGAF, ensuring I bring industry-recognized expertise to every project.
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>📈 Why Choose Me?</h2>
+        <p>
+          Proven Experience: Worked for leading ICT and IoT solution providers, supporting major operators, banking,
+          and financial enterprises. End-to-End Solutions: From designing high availability architectures to delivering
+          query optimizations and backup solutions, I offer complete database management expertise. Training & Support:
+          I also provide course training for companies looking to empower their teams with database-related skills.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>🤝 Let’s Collaborate</h2>
+        <p>
+          If you’re looking for a seasoned database professional to tackle challenges in MySQL, PostgreSQL, MongoDB,
+          Oracle, or other database technologies, let’s discuss how I can help streamline your operations and enhance
+          performance.
+        </p>
+        <p>
+          📩 Contact Me: I’m ready to dive into your project. Reach out, and let’s unlock the full potential of your
+          data infrastructure together!
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
