@@ -35,7 +35,7 @@
       .trust-item:last-child{border-right:none}
       .trust-item h3{font-size:1.05rem;line-height:1.3;margin:0 0 10px;text-align:center}
       .trust-item p{margin:0;color:var(--muted);text-align:center;line-height:1.6;font-size:.95rem}
-      .quickstart{padding:22px 22px 20px;background:linear-gradient(180deg,#151d31,#0f1526)}
+      .quickstart{padding:22px 22px 20px;background:linear-gradient(180deg,#151d31,#0f1526);min-height:610px}
       .quickstart h3{margin:14px 0 8px;font-size:2rem}
       .quickstart .sub{margin:0 0 14px}
       .qs-tabs{display:flex;gap:10px;flex-wrap:wrap}
@@ -44,11 +44,12 @@
       .qs-code-wrap{border:1px solid rgba(255,255,255,.14);border-radius:12px;overflow:hidden;background:#070b14;margin:12px 0}
       .qs-code-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.1);font-weight:700;color:#9db0cc}
       .copy-btn{border:1px solid rgba(255,255,255,.25);background:transparent;color:#d9e6ff;border-radius:8px;padding:6px 10px;cursor:pointer}
-      .qs-code{margin:0;padding:14px;color:#20e3a2;font-family:ui-monospace,monospace;white-space:pre-wrap;line-height:1.6}
+      .qs-code{margin:0;padding:14px;color:#20e3a2;font-family:ui-monospace,monospace;white-space:pre-wrap;line-height:1.6;min-height:132px}
       .qs-steps{list-style:none;padding:0;margin:0;border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden}
-      .qs-steps li{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+      .qs-steps li{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);min-height:66px}
       .qs-steps li:first-child{border-top:none}
       .qs-num{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;border:1px solid rgba(116,175,255,.55);color:#8fc1ff;font-weight:700}
+      .qs-core{margin:12px 2px 0;color:#9ec4ff;font-weight:600;line-height:1.5}
       footer{border-top:1px solid var(--line);color:var(--muted);padding:20px 0 30px}
       @media (max-width:1100px){.features{grid-template-columns:repeat(2,1fr)}}
       @media (max-width:900px){.hero{grid-template-columns:1fr;padding-top:56px}.features,.lists{grid-template-columns:1fr}.menu{gap:10px;flex-wrap:wrap}.trust-grid{grid-template-columns:1fr}.trust-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.12);padding:14px 0}.trust-item:last-child{border-bottom:none}}
@@ -87,10 +88,11 @@
           <h3 id="qsTitle">work_mem – Quick Guide</h3>
           <p class="sub" id="qsSubtitle">Purpose: controls memory used by each sort/hash operation, affecting disk spill and query performance.</p>
           <div class="qs-code-wrap">
-            <div class="qs-code-head"><span>DOCKER</span><button id="copyCmd" class="copy-btn">Copy</button></div>
+            <div class="qs-code-head"><span>CONFIG / COMMAND</span></div>
             <pre class="qs-code" id="qsCode"></pre>
           </div>
           <ol class="qs-steps" id="qsSteps"></ol>
+          <p class="qs-core" id="qsCore"></p>
         </aside>
       </section>
       <section id="features" class="cap-wrap"><div class="cap-label" id="capLabel">CAPABILITIES</div><h2 class="cap-heading" id="capHeading">Core database services for production workloads</h2><p class="cap-sub" id="capSub">From troubleshooting to architecture, delivered by senior database specialists.</p><div class="features" id="featureCards"><article class="feature"><div class="kicker">SUPPORT</div><h3>24×7 Database Support</h3><p>Resolve issues faster and keep databases and extensions healthy with continuous consultative support.</p><div class="chips"><span class="chip">24×7</span><span class="chip">Incident response</span></div><a href="/about-me">Contact support</a></article><article class="feature"><div class="kicker">MANAGED SERVICES</div><h3>Proactive DBA Management</h3><p>Offload round-the-clock monitoring, maintenance, and optimization at a fraction of full-time DBA cost.</p><div class="chips"><span class="chip">Monitoring</span><span class="chip">Cost efficient</span></div><a href="/about-me">Explore managed services</a></article><article class="feature"><div class="kicker">CONSULTING</div><h3>Performance &amp; Architecture</h3><p>Solve complex query bottlenecks and design resilient, scalable database architectures with expert guidance.</p><div class="chips"><span class="chip">Performance</span><span class="chip">Design review</span></div><a href="/about-me">Talk to an expert</a></article><article class="feature"><div class="kicker">TRAINING</div><h3>Hands-on Team Enablement</h3><p>Upskill teams with instructor-led, practical training sessions delivered remotely or onsite.</p><div class="chips"><span class="chip">Instructor-led</span><span class="chip">Onsite or remote</span></div><a href="/about-me">View training options</a></article></div></section>
@@ -126,29 +128,28 @@ SET work_mem = '64MB';
 
 -- Global level (use with caution)
 ALTER SYSTEM SET work_mem = '32MB';
-SELECT pg_reload_conf();`,steps:['OLTP: 4MB ~ 32MB','OLAP / Reporting: 64MB ~ 256MB','Use EXPLAIN ANALYZE to detect disk-based operations, then adjust incrementally. 👉 Core idea: keep sort/hash operations in memory, but avoid excessive memory usage under high concurrency.']},
+SELECT pg_reload_conf();`,steps:['OLTP: 4MB ~ 32MB','OLAP / Reporting: 64MB ~ 256MB','Use EXPLAIN ANALYZE to detect disk-based operations, then adjust incrementally.'],coreIdea:'👉 Core idea: keep sort/hash operations in memory, but avoid excessive memory usage under high concurrency.'},
         mysql:{title:'sort_buffer_size – Quick Guide',subtitle:'Purpose: controls memory per-session for sort operations, helping reduce on-disk temp sorting.',code:`-- Session level (recommended for tuning)
 SET SESSION sort_buffer_size = 4*1024*1024;
 
 -- Global level (use with caution)
-SET GLOBAL sort_buffer_size = 8*1024*1024;`,steps:['OLTP: 1MB ~ 4MB','Reporting / heavier sorting: 8MB ~ 32MB','Check EXPLAIN and status metrics (Sort_merge_passes, Created_tmp_disk_tables), then tune gradually. 👉 Core idea: keep sort operations efficient without over-allocating memory per connection.']},
+SET GLOBAL sort_buffer_size = 8*1024*1024;`,steps:['OLTP: 1MB ~ 4MB','Reporting / heavier sorting: 8MB ~ 32MB','Check EXPLAIN and status metrics (Sort_merge_passes, Created_tmp_disk_tables), then tune gradually.'],coreIdea:'👉 Core idea: keep sort operations efficient without over-allocating memory per connection.'},
         mongodb:{title:'wiredTiger cacheSizeGB – Quick Guide',subtitle:'Purpose: defines WiredTiger cache memory used for hot data and indexes, impacting read/write latency.',code:`# mongod.conf
 storage:
   wiredTiger:
     engineConfig:
-      cacheSizeGB: 8`,steps:['Start with available RAM and reserve memory for OS + other services.','For mixed workloads, monitor cache eviction and page faults before increasing.','Validate with MongoDB metrics (cache usage/evictions) and tune conservatively. 👉 Core idea: keep active working set in memory while preserving system stability under concurrency.']}
+      cacheSizeGB: 8`,steps:['Start with available RAM and reserve memory for OS + other services.','For mixed workloads, monitor cache eviction and page faults before increasing.','Validate with MongoDB metrics (cache usage/evictions) and tune conservatively.'],coreIdea:'👉 Core idea: keep active working set in memory while preserving system stability under concurrency.'}
       };
 
       const qsTitle=document.getElementById('qsTitle');
       const qsSubtitle=document.getElementById('qsSubtitle');
       const qsCode=document.getElementById('qsCode');
       const qsSteps=document.getElementById('qsSteps');
-      const copyBtn=document.getElementById('copyCmd');
+      const qsCore=document.getElementById('qsCore');
       const qsTabs=[...document.querySelectorAll('.qs-tab')];
 
-      const renderQuickstart=(db)=>{const data=quickstartData[db];if(!data)return;qsTitle.textContent=data.title;qsSubtitle.textContent=data.subtitle;qsCode.textContent=data.code;qsSteps.innerHTML='';data.steps.forEach((step,idx)=>{const li=document.createElement('li');li.innerHTML=`<span class="qs-num">${String(idx+1).padStart(2,'0')}</span><span>${step}</span>`;qsSteps.appendChild(li);});qsTabs.forEach((t)=>t.classList.toggle('active',t.dataset.db===db));};
+      const renderQuickstart=(db)=>{const data=quickstartData[db];if(!data)return;qsTitle.textContent=data.title;qsSubtitle.textContent=data.subtitle;qsCode.textContent=data.code;qsSteps.innerHTML='';data.steps.forEach((step,idx)=>{const li=document.createElement('li');li.innerHTML=`<span class="qs-num">${String(idx+1).padStart(2,'0')}</span><span>${step}</span>`;qsSteps.appendChild(li);});qsCore.textContent=data.coreIdea||'';qsTabs.forEach((t)=>t.classList.toggle('active',t.dataset.db===db));};
       qsTabs.forEach((tab)=>tab.addEventListener('click',()=>renderQuickstart(tab.dataset.db)));
-      if(copyBtn){copyBtn.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(qsCode.textContent);copyBtn.textContent='Copied';setTimeout(()=>{copyBtn.textContent='Copy';},1200);}catch(_e){copyBtn.textContent='Copy failed';setTimeout(()=>{copyBtn.textContent='Copy';},1200);}})}
       renderQuickstart('postgresql');
       fetch('/api/content').then((r)=>r.json()).then((data)=>{document.getElementById('siteName').innerHTML=`${data.siteName||'Doc'}<span>Flow</span>`;document.getElementById('tagline').textContent=data.tagline||'';document.getElementById('heroTitle').textContent=data.heroTitle||'';document.getElementById('heroDescription').textContent=data.heroDescription||'';const p=document.getElementById('primaryCta'); p.textContent=data?.primaryCta?.label||'Quick Check'; p.href=data?.primaryCta?.href||'/health';const s=document.getElementById('secondaryCta'); s.textContent=data?.secondaryCta?.label||'Hire Me for Consulting'; s.href=data?.secondaryCta?.href||'/about-me';const cap=data.capabilities||{};document.getElementById('capLabel').textContent=cap.label||'CAPABILITIES';document.getElementById('capHeading').textContent=cap.heading||'Core database services for production workloads';document.getElementById('capSub').textContent=cap.subheading||'';renderCards((cap.cards&&cap.cards.length)?cap.cards:defaultCapabilityCards);fillList('pages',data.pages||[]); fillList('posts',data.posts||[]);}).catch(()=>{document.getElementById('heroTitle').textContent='Failed to load migrated content';document.getElementById('heroDescription').textContent='Please confirm /api/content is reachable.';});
     
